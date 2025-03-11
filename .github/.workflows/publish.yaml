@@ -95,22 +95,3 @@ jobs:
             }
 
             fs.writeFileSync("last_version.md", lastVersion.slice(1).join("\n").trim(), "utf8");
-
-      # Create a release
-      - name: 🚀 Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v${{ steps.get_new_version.outputs.result }}
-          name: Release ${{ steps.get_new_version.outputs.result }}
-          body_path: last_version.md
-          prerelease: false
-
-      - name: Build example
-        run: |
-          cd example 
-          flutter build web --release --base-href /liquid-flutter/
-      - name: Deploy example
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./example/build/web
