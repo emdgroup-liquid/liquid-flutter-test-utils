@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:liquid_flutter/liquid_flutter.dart';
@@ -10,19 +11,25 @@ import 'package:liquid_flutter_test_utils/local_file_comparator_with_threshold.d
 /// The localizations delegates to be used in golden tests.
 List<LocalizationsDelegate> ldGoldenLocalizationsDelegates = [];
 
+enum GoldenUiMode {
+  collapsed,
+  screen,
+  screenWithSystemUi,
+}
+
 /// Options for the [ldFrame] widget.
 class LdFrameOptions {
-  final bool expandToScreenSize;
   final int width;
+  final GoldenUiMode uiMode;
 
   const LdFrameOptions({
-    /// Whether the generated frame should simulate a full screen size or only
-    /// the size of the widget.
-    this.expandToScreenSize = true,
-
     /// The width of the frame. The height will will be adjusted to fit the
     /// widget or the screen size.
     this.width = 600,
+
+    /// Whether the frame should only be in size of the widget or in size of the
+    /// screen (with or without system UI).
+    this.uiMode = GoldenUiMode.screenWithSystemUi,
   });
 }
 
@@ -104,36 +111,96 @@ Widget ldFrame({
   required LdThemeSize size,
   required LdFrameOptions ldFrameOptions,
 }) {
-  return ldThemeWrapper(
-    size: size,
-    brightnessMode:
-        dark ? LdThemeBrightnessMode.dark : LdThemeBrightnessMode.light,
-    child: Builder(
-      builder: (context) {
-        return LdPortal(
-          child: LdThemedAppBuilder(
-            appBuilder: (context, theme) => MaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: theme,
-              locale: LiquidLocalizations.supportedLocales.first,
-              supportedLocales: LiquidLocalizations.supportedLocales,
-              localizationsDelegates: [
-                ...ldGoldenLocalizationsDelegates,
-                ...LiquidLocalizations.localizationsDelegates,
-              ],
-              home: Scaffold(
+  return KeyedSubtree(
+    // force a new subtree each time a new frame is created in order to avoid
+    // state issues
+    key: UniqueKey(),
+    child: ldThemeWrapper(
+      size: size,
+      brightnessMode:
+          dark ? LdThemeBrightnessMode.dark : LdThemeBrightnessMode.light,
+      child: LdPortal(
+        child: LdThemedAppBuilder(
+          appBuilder: (context, theme) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: theme,
+            locale: LiquidLocalizations.supportedLocales.first,
+            supportedLocales: LiquidLocalizations.supportedLocales,
+            localizationsDelegates: [
+              ...ldGoldenLocalizationsDelegates,
+              ...LiquidLocalizations.localizationsDelegates,
+            ],
+            home: Builder(builder: (context) {
+              // ignore: invalid_use_of_visible_for_testing_member
+              final SystemUiOverlayStyle uiStyle = SystemChrome.latestStyle ??
+                  (dark
+                      ? SystemUiOverlayStyle.light
+                      : SystemUiOverlayStyle.dark);
+              // debugPrintStack();
+              return Scaffold(
                 body: Column(
                   key: key,
-                  mainAxisSize: ldFrameOptions.expandToScreenSize
+                  mainAxisSize: ldFrameOptions.uiMode != GoldenUiMode.collapsed
                       ? MainAxisSize.max
                       : MainAxisSize.min,
-                  children: [child],
+                  children: [
+                    if (ldFrameOptions.uiMode ==
+                        GoldenUiMode.screenWithSystemUi)
+                      StatusBar(style: uiStyle),
+                    Flexible(
+                      flex: ldFrameOptions.uiMode == GoldenUiMode.collapsed
+                          ? 0
+                          : 1,
+                      child: child,
+                    ),
+                    if (ldFrameOptions.uiMode ==
+                        GoldenUiMode.screenWithSystemUi)
+                      HomeIndicator(style: uiStyle),
+                  ],
                 ),
-              ),
-            ),
+              );
+            }),
           ),
-        );
-      },
+        ),
+      ),
     ),
   );
+}
+
+class HomeIndicator extends StatelessWidget {
+  const HomeIndicator({required this.style, super.key});
+  final SystemUiOverlayStyle style;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: style.systemNavigationBarColor,
+      width: double.infinity,
+      child: SvgPicture.asset(
+        fit: BoxFit.fitWidth,
+        style.systemNavigationBarIconBrightness == Brightness.light
+            ? 'assets/home_indicator_light.svg'
+            : 'assets/home_indicator_dark.svg',
+      ),
+    );
+  }
+}
+
+class StatusBar extends StatelessWidget {
+  const StatusBar({required this.style, super.key});
+  final SystemUiOverlayStyle style;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: style.statusBarColor,
+      width: double.infinity,
+      child: SvgPicture.asset(
+        fit: BoxFit.fitWidth,
+        style.statusBarIconBrightness == Brightness.light
+            ? 'assets/status_bar_light.svg'
+            : 'assets/status_bar_dark.svg',
+      ),
+    );
+  }
 }

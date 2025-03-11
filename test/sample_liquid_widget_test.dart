@@ -5,6 +5,7 @@ import 'package:liquid_flutter_test_utils/golden_utils.dart';
 import 'package:liquid_flutter_test_utils/multi_golden_test.dart';
 import 'package:liquid_flutter_test_utils/widget_tree_test.dart';
 
+import '../example/sample_liquid_screen.dart';
 import '../example/sample_liquid_widget.dart';
 
 void main() {
@@ -34,7 +35,7 @@ void main() {
       },
       performWidgetTreeTests: true,
       ldFrameOptions: LdFrameOptions(
-        expandToScreenSize: false,
+        uiMode: GoldenUiMode.collapsed,
       ),
     );
   });
@@ -55,6 +56,22 @@ void main() {
       widget: widget,
       findWidget: (tester, widget) => find.byKey(key),
       goldenName: "HelloWorldWidgetTree",
+    );
+  });
+
+  testGoldens("Sample Screen renders correctly", (tester) async {
+    await multiGolden(
+      tester,
+      "SampleLiquidScreen",
+      {
+        "Default": (tester, placeWidget) async {
+          await placeWidget(SampleLiquidScreen());
+        },
+      },
+      performWidgetTreeTests: false,
+      ldFrameOptions: LdFrameOptions(
+        uiMode: GoldenUiMode.screenWithSystemUi,
+      ),
     );
   });
 }

@@ -38,6 +38,7 @@ Future<void> multiGolden(
         final slug = '${entry.key}/'
             "${themeSize.toString().split(".").last}"
             "-${brightness.toString().split(".").last}";
+
         await tester.binding.setSurfaceSize(
           Size(ldFrameOptions.width.toDouble(), 1000),
         );
@@ -52,6 +53,7 @@ Future<void> multiGolden(
               size: themeSize,
               ldFrameOptions: ldFrameOptions,
             ),
+            duration: Duration(milliseconds: 100),
           );
 
           if (performWidgetTreeTests) {
@@ -67,9 +69,13 @@ Future<void> multiGolden(
         final size =
             find.byKey(ValueKey(slug)).evaluate().single.size ?? Size.zero;
         await tester.pumpAndSettle();
+        final heightOffset =
+            ldFrameOptions.uiMode == GoldenUiMode.collapsed ? 0 : 64;
         await tester.binding.setSurfaceSize(
-          Size(ldFrameOptions.width.toDouble(), size.height),
+          Size(ldFrameOptions.width.toDouble(), size.height + heightOffset),
         );
+        tester.view.physicalSize =
+            Size(ldFrameOptions.width.toDouble(), size.height + heightOffset);
         await tester.pumpAndSettle();
         await screenMatchesGolden(tester, '$name/$slug');
       }

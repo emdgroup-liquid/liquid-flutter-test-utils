@@ -38,6 +38,7 @@ class WidgetTreeNode {
         return ' $name="$value"';
       },
     ).join();
+
     final content = children.isEmpty
         ? ''
         : [
