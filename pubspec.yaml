@@ -1,7 +1,7 @@
 name: liquid_flutter_test_utils
-description: "A new Flutter package project."
+description: "Test utilities for Liquid Flutter and more"
 version: 1.0.0
-homepage:
+homepage: https://github.com/emdgroup-liquid/liquid-flutter-test-utils
 
 environment:
   sdk: ^3.6.1
