@@ -17,13 +17,19 @@ void main() {
   /// It will also generate the widget tree for each scenario.
   testGoldens("Sample Widget renders correctly in multiple scenarios",
       (tester) async {
-    final widget = SampleLiquidWidget();
     await multiGolden(
       tester,
       "SampleLiquidWidget",
       {
         "Default": (tester, placeWidget) async {
-          await placeWidget(widget);
+          await placeWidget(SampleLiquidWidget(
+            isError: false,
+          ));
+        },
+        "Error": (tester, placeWidget) async {
+          await placeWidget(SampleLiquidWidget(
+            isError: true,
+          ));
         },
       },
       performWidgetTreeTests: true,

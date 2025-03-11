@@ -8,6 +8,18 @@ class SampleLiquidWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return isError ? _buildError(context) : _buildNormal(context);
+  }
+
+  Widget _buildError(BuildContext context) {
+    return LdCard(
+      child: LdExceptionView(
+        exception: LdException(message: "An error occurred"),
+      ),
+    );
+  }
+
+  Widget _buildNormal(BuildContext context) {
     return Column(
       children: [
         LdCard(
