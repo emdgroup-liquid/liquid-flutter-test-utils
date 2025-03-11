@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:liquid_flutter/liquid_flutter.dart';
@@ -111,7 +110,7 @@ Widget ldFrame({
         dark ? LdThemeBrightnessMode.dark : LdThemeBrightnessMode.light,
     child: Builder(
       builder: (context) {
-        return Portal(
+        return LdPortal(
           child: LdThemedAppBuilder(
             appBuilder: (context, theme) => MaterialApp(
               debugShowCheckedModeBanner: false,
