@@ -1,0 +1,3 @@
+<Text data="Hello World">
+  <RichText textAlign="TextAlign.start" softWrap="true" overflow="TextOverflow.clip" textScaler="no scaling" textWidthBasis="TextWidthBasis.parent" text="Hello World" />
+</Text>
