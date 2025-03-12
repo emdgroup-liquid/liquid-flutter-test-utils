@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:liquid_flutter/liquid_flutter.dart';
 import 'package:liquid_flutter_test_utils/gen/fonts.gen.dart';
@@ -20,17 +21,26 @@ enum GoldenUiMode {
 /// Options for the [ldFrame] widget.
 class LdFrameOptions {
   final int width;
+  final int? height;
   final GoldenUiMode uiMode;
+  final bool showBackButton;
 
   const LdFrameOptions({
-    /// The width of the frame. The height will will be adjusted to fit the
-    /// widget or the screen size.
+    /// The width of the frame.
     this.width = 600,
+
+    /// The height of the frame. If null, the height will be adjusted to fit the
+    /// widget or the screen size.
+    this.height,
 
     /// Whether the frame should only be in size of the widget or in size of the
     /// screen (with or without system UI).
     this.uiMode = GoldenUiMode.screenWithSystemUi,
-  });
+
+    /// Whether the app bar should show a back button. This is helpful for
+    /// generating screenshots for screens that are usually on a sub-route.
+    this.showBackButton = false,
+  }) : assert(!(uiMode == GoldenUiMode.collapsed && height != null));
 }
 
 /// Wraps the [child] with a [LdThemeProvider] and [Localizations] widget as
@@ -111,6 +121,24 @@ Widget ldFrame({
   required LdThemeSize size,
   required LdFrameOptions ldFrameOptions,
 }) {
+  GoRouter router(Function(BuildContext, GoRouterState) app) {
+    return GoRouter(
+      initialLocation: ldFrameOptions.showBackButton ? '/child' : '/',
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => app(context, state),
+          routes: [
+            GoRoute(
+              path: 'child',
+              builder: (context, state) => app(context, state),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
   return KeyedSubtree(
     // force a new subtree each time a new frame is created in order to avoid
     // state issues
@@ -121,7 +149,7 @@ Widget ldFrame({
           dark ? LdThemeBrightnessMode.dark : LdThemeBrightnessMode.light,
       child: LdPortal(
         child: LdThemedAppBuilder(
-          appBuilder: (context, theme) => MaterialApp(
+          appBuilder: (context, theme) => MaterialApp.router(
             debugShowCheckedModeBanner: false,
             theme: theme,
             locale: LiquidLocalizations.supportedLocales.first,
@@ -130,7 +158,7 @@ Widget ldFrame({
               ...ldGoldenLocalizationsDelegates,
               ...LiquidLocalizations.localizationsDelegates,
             ],
-            home: Builder(builder: (context) {
+            routerConfig: router((context, state) {
               // ignore: invalid_use_of_visible_for_testing_member
               final SystemUiOverlayStyle uiStyle = SystemChrome.latestStyle ??
                   (dark
@@ -174,6 +202,7 @@ class HomeIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(bottom: 16),
       color: style.systemNavigationBarColor,
       width: double.infinity,
       child: SvgPicture.asset(
@@ -193,6 +222,7 @@ class StatusBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(bottom: 16),
       color: style.statusBarColor,
       width: double.infinity,
       child: SvgPicture.asset(

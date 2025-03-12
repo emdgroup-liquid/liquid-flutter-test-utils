@@ -71,6 +71,7 @@ void main() {
       performWidgetTreeTests: false,
       ldFrameOptions: LdFrameOptions(
         uiMode: GoldenUiMode.screenWithSystemUi,
+        showBackButton: true,
       ),
     );
   });

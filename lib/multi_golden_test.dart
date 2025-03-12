@@ -40,7 +40,11 @@ Future<void> multiGolden(
             "-${brightness.toString().split(".").last}";
 
         await tester.binding.setSurfaceSize(
-          Size(ldFrameOptions.width.toDouble(), 1000),
+          Size(
+              ldFrameOptions.width.toDouble(),
+              ldFrameOptions.height?.toDouble() ??
+                  // if height is null, use a 16:9 aspect ratio
+                  ldFrameOptions.width.toDouble() / 9 * 16),
         );
 
         // Place the widget
