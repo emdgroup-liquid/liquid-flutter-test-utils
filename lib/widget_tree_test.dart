@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as path;
 
-final Set<String> defaultIgnoredWidgets = {
+final Set<dynamic> defaultIgnoredWidgets = {
   MediaQuery,
   Material,
   AnimatedDefaultTextStyle,
@@ -13,13 +13,13 @@ final Set<String> defaultIgnoredWidgets = {
   AnimatedPhysicalModel,
   Semantics,
   Actions,
-  NotificationListener,
+  'NotificationListener',
   Focus,
   'Provider',
   KeyedSubtree,
   MouseRegion,
   Builder,
-}.map((w) => w.toString().split('<').first).toSet();
+};
 
 class WidgetTreeNode {
   WidgetTreeNode(this.widget, this.children);
@@ -72,6 +72,9 @@ Future<void> widgetTreeMatchesGolden(
   final testTree = createWidgetTree(
     tester.element(findWidget?.call(tester, widget) ?? find.byWidget(widget)),
     ignoredWidgets: ignoredWidgets ?? defaultIgnoredWidgets,
+    ignoredWidgets: (ignoredWidgets ?? defaultIgnoredWidgets)
+        .map((e) => e.toString())
+        .toSet(),
     ignorePrivateWidgets: true,
   );
 
@@ -107,6 +110,7 @@ Future<void> widgetTreeMatchesGolden(
 WidgetTreeNode? createWidgetTree(
   Element e, {
   required Set<dynamic> ignoredWidgets,
+  required Set<String> ignoredWidgets,
   required bool ignorePrivateWidgets,
 }) {
   final widget = e.widget;
@@ -122,7 +126,10 @@ WidgetTreeNode? createWidgetTree(
   });
 
   final type = widget.runtimeType.toString().split('<').first;
+  final type = widget.runtimeType.toString();
+  final typeWithoutGeneric = type.split('<').first;
   if (ignoredWidgets.contains(type) ||
+      ignoredWidgets.contains(typeWithoutGeneric) ||
       ignorePrivateWidgets && type.startsWith('_')) {
     if (children.isNotEmpty) {
       return children.length == 1

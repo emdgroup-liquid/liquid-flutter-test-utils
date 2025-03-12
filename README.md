@@ -238,8 +238,12 @@ await widgetTreeMatchesGolden(
   ignoredWidgets: {
     MediaQuery,
     Material,
+    // You can use types or strings:
+    'NotificationListener', // Ignore all NotificationListener widgets, no matter the generic type
+    // For generic types, you could also specify the generic type arguments:
+    NotificationListener<ScrollNotification>,
     // Add other widgets to ignore
-  }.map((w) => w.toString().split('<').first).toSet(), // Strip generic types
+  },
 );
 ```
 
