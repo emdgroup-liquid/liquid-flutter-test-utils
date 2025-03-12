@@ -125,13 +125,69 @@ await multiGolden(
   },
   performWidgetTreeTests: true, // Generate widget tree goldens
   ldFrameOptions: LiquidFrameOptions(
-    expandToScreenSize: false, // Only use the space needed by the widget
+    uiMode: GoldenUiMode.collapsed, // Only show the widget (no screenshot-like frame)
     width: 800, // Set custom width
   ),
 );
 ```
 
+## Generated Golden Files
+
+When running the tests, the package generates golden images for all combinations of theme sizes and brightness modes. The files follow this structure:
+
+```
+test/goldens/
+└── SampleLiquidWidget/
+    ├── Default/
+    │   ├── l-dark.png   # Large theme size, dark mode
+    │   ├── l-light.png  # Large theme size, light mode
+    │   ├── m-dark.png   # Medium theme size, dark mode
+    │   ├── m-light.png  # Medium theme size, light mode
+    │   ├── s-dark.png   # Small theme size, dark mode
+    │   └── s-light.png  # Small theme size, light mode
+    └── Error/
+        ├── l-dark.png
+        ├── l-light.png
+        ├── m-dark.png
+        ├── m-light.png
+        ├── s-dark.png
+        └── s-light.png
+```
+Each state of your widget (e.g., "Default", "Error") gets its own directory containing all theme variations.
+
+Here are some example generated golden images that were generated for `SampleLiquidWidget`:
+
+| Theme       | Dark Mode                                                 | Light Mode                                                 |
+|-------------|-----------------------------------------------------------|------------------------------------------------------------|
+| **Large**   | ![](./test/goldens/SampleLiquidWidget/Default/l-dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/l-light.png) |
+| **Medium**  | ![](./test/goldens/SampleLiquidWidget/Default/m-dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/m-light.png) |
+| **Small**   | ![](./test/goldens/SampleLiquidWidget/Default/s-dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/s-light.png) |
+
 ## Advanced Features
+
+### Frame Options
+
+The `LdFrameOptions` class is used to configure options for the [ldFrame] widget. It provides flexibility in defining the size, UI mode, and other settings for generating screenshots or UI frames. Below are the details of the class and its parameters.
+
+#### UI Mode
+
+The `GoldenUiMode` enum defines the available modes for how the frame should be sized. It has three possible values:
+
+- `collapsed`: The frame will be sized to match the widget's size.
+- `screen`: The frame will match the screen's size (including system UI).
+- `screenWithSystemUi`: Similar to `screen`, but includes the system UI as well.
+
+#### `LdFrameOptions` Constructor
+
+The `LdFrameOptions` constructor allows you to configure the widget frame with the following parameters:
+
+| Parameter           | Type               | Default Value                     | Description                                                                                                 |
+|---------------------|--------------------|-----------------------------------|-------------------------------------------------------------------------------------------------------------|
+| `width`             | `int`              | `600`                             | The width of the frame.                                                                                     |
+| `height`            | `int?`             | `null`                            | The height of the frame. If `null`, the height will adjust to fit the widget or screen size.                |
+| `uiMode`            | `GoldenUiMode`     | `GoldenUiMode.screenWithSystemUi` | Defines how the frame should be sized (collapsed, screen, or screenWithSystemUi).                   |
+| `showBackButton`    | `bool`             | `false`                           | Whether the app bar should show a back button. Useful for generating screenshots for screens on sub-routes. |
+  
 
 ### Custom Threshold for Image Comparison
 
