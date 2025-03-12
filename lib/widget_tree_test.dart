@@ -22,22 +22,26 @@ final Set<dynamic> defaultIgnoredWidgets = {
 };
 
 class WidgetTreeNode {
-  WidgetTreeNode(this.widget, this.children);
+  WidgetTreeNode(this.widget, this.children, {this.bounds});
   Widget widget;
+  Rect? bounds;
   List<WidgetTreeNode> children;
 
   String toXmlString([int indent = 0]) {
     final indentStr = '  ' * indent;
     final tag =
         widget.runtimeType.toString().replaceAll('<', '-').replaceAll('>', '');
-    final attrs = widget.toDiagnosticsNode().getProperties().map(
-      (property) {
-        final name = property.name;
-        final value = property.value;
-        if (value == null) return '';
-        return ' $name="$value"';
-      },
-    ).join();
+    final attrs = [
+      ...widget.toDiagnosticsNode().getProperties().map(
+        (property) {
+          final name = property.name;
+          final value = property.value;
+          if (value == null) return '';
+          return ' $name="$value"'.replaceAll("\n", '');
+        },
+      ),
+      if (bounds != null) ' bounds="$bounds"'
+    ].join('');
 
     final content = children.isEmpty
         ? ''
@@ -71,7 +75,7 @@ Future<void> widgetTreeMatchesGolden(
 
   final testTree = createWidgetTree(
     tester.element(findWidget?.call(tester, widget) ?? find.byWidget(widget)),
-    ignoredWidgets: ignoredWidgets ?? defaultIgnoredWidgets,
+    tester: tester,
     ignoredWidgets: (ignoredWidgets ?? defaultIgnoredWidgets)
         .map((e) => e.toString())
         .toSet(),
@@ -109,7 +113,7 @@ Future<void> widgetTreeMatchesGolden(
 
 WidgetTreeNode? createWidgetTree(
   Element e, {
-  required Set<dynamic> ignoredWidgets,
+  required WidgetTester tester,
   required Set<String> ignoredWidgets,
   required bool ignorePrivateWidgets,
 }) {
@@ -119,28 +123,29 @@ WidgetTreeNode? createWidgetTree(
   e.visitChildren((element) {
     final child = createWidgetTree(
       element,
+      tester: tester,
       ignoredWidgets: ignoredWidgets,
       ignorePrivateWidgets: ignorePrivateWidgets,
     );
     if (child != null) children.add(child);
   });
 
-  final type = widget.runtimeType.toString().split('<').first;
   final type = widget.runtimeType.toString();
   final typeWithoutGeneric = type.split('<').first;
+  final bounds = tester.getRect(find.byElementPredicate((el) => el == e));
   if (ignoredWidgets.contains(type) ||
       ignoredWidgets.contains(typeWithoutGeneric) ||
       ignorePrivateWidgets && type.startsWith('_')) {
     if (children.isNotEmpty) {
       return children.length == 1
           ? children.first
-          : WidgetTreeNode(widget, children);
+          : WidgetTreeNode(widget, children, bounds: bounds);
     } else {
       return null;
     }
   }
 
-  return WidgetTreeNode(widget, children);
+  return WidgetTreeNode(widget, children, bounds: bounds);
 }
 
 /// ANSI escape codes for color highlighting

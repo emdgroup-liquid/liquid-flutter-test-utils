@@ -44,10 +44,12 @@ void main() {
   testGoldens("Arbitrary single widget tree renders correctly", (tester) async {
     const key = ValueKey("HelloWorld");
     final widget = ldThemeWrapper(
-      child: Column(
-        children: [
-          Text(key: key, "Hello World"),
-        ],
+      child: Container(
+        key: key,
+        height: 100,
+        width: 200,
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        child: Text("Hello World"),
       ),
     );
     await tester.pumpWidget(widget);

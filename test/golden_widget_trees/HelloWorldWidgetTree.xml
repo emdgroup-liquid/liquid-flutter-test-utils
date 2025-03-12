@@ -1,3 +1,9 @@
-<Text data="Hello World">
-  <RichText textAlign="TextAlign.start" softWrap="true" overflow="TextOverflow.clip" textScaler="no scaling" textWidthBasis="TextWidthBasis.parent" text="Hello World" />
-</Text>
+<Container padding="EdgeInsets(16.0, 8.0, 16.0, 8.0)" clipBehavior="Clip.none" constraints="BoxConstraints(w=200.0, h=100.0)" bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
+  <ConstrainedBox constraints="BoxConstraints(w=200.0, h=100.0)" bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
+    <Padding padding="EdgeInsets(16.0, 8.0, 16.0, 8.0)" bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
+      <Text data="Hello World" bounds="Rect.fromLTRB(16.0, 8.0, 584.0, 192.8)">
+        <RichText textAlign="TextAlign.start" softWrap="true" overflow="TextOverflow.clip" textScaler="no scaling" textWidthBasis="TextWidthBasis.parent" text="Hello World" bounds="Rect.fromLTRB(16.0, 8.0, 584.0, 192.8)" />
+      </Text>
+    </Padding>
+  </ConstrainedBox>
+</Container>
