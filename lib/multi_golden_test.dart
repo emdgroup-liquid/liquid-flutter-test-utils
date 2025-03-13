@@ -64,7 +64,9 @@ Future<void> multiGolden(
             await widgetTreeMatchesGolden(
               tester,
               widget: widget,
-              goldenName: '$name/$slug',
+              options: WidgetTreeOptions(
+                goldenName: '$name/$slug',
+              ),
             );
           }
         });

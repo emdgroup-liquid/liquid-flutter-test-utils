@@ -225,9 +225,52 @@ final themedWidget = ldThemeWrapper(
 
 ## Widget Tree Testing Details
 
+### Overview
+
 The widget tree testing functionality captures the structure of your widget tree in an XML format, ignoring implementation details like hash codes and internal widgets. This helps you catch unexpected structural changes in your widgets.
 
-### Customizing Ignored Widgets
+### Configuration Options
+
+You can customize the behavior of widget tree testing using `WidgetTreeOptions`:
+
+```dart
+enum IncludeWidgetBounds {
+  none,
+  relative,
+  absolute,
+}
+
+class WidgetTreeOptions {
+  const WidgetTreeOptions({
+    this.findWidget,
+    this.goldenPath = 'test/golden_widget_trees',
+    this.goldenName,
+    this.strippedWidgets = defaultIgnoredWidgets,
+    this.stripPrivateWidgets = true,
+    this.includeWidgetBounds = IncludeWidgetBounds.relative,
+  });
+
+  final Finder Function(WidgetTester, Widget)? findWidget;
+  final String goldenPath;
+  final String? goldenName;
+  final Set<dynamic> strippedWidgets;
+  final bool stripPrivateWidgets;
+  final IncludeWidgetBounds includeWidgetBounds;
+}
+```
+
+### Key Configuration Options
+
+- **Golden Path (`goldenPath`)**: Specifies the directory where golden widget trees are stored. Default: `'test/golden_widget_trees'`.
+- **Golden Name (`goldenName`)**: The name of the golden file for comparison. Defaults to the widget's name.
+- **Ignored Widgets (`strippedWidgets`)**: Defines a set of widgets to be stripped from the tree to reduce verbosity.
+- **Strip Private Widgets (`stripPrivateWidgets`)**: If `true`, private widgets (starting with `_`) are removed. Default: `true`.
+- **Include Widget Bounds (`includeWidgetBounds`)**:
+    - `IncludeWidgetBounds.none`: Bounds are not included.
+    - `IncludeWidgetBounds.relative`: Bounds are relative to the parent widget.
+    - `IncludeWidgetBounds.absolute`: Bounds are absolute on the screen.
+
+## Customizing Ignored Widgets
 
 You can customize which widgets are ignored during widget tree capture:
 
@@ -235,17 +278,23 @@ You can customize which widgets are ignored during widget tree capture:
 await widgetTreeMatchesGolden(
   tester,
   widget: widget,
-  ignoredWidgets: {
-    MediaQuery,
-    Material,
-    // You can use types or strings:
-    'NotificationListener', // Ignore all NotificationListener widgets, no matter the generic type
-    // For generic types, you could also specify the generic type arguments:
-    NotificationListener<ScrollNotification>,
-    // Add other widgets to ignore
-  },
+  options: WidgetTreeOptions(
+    strippedWidgets: {
+        MediaQuery,
+        Material,
+        MediaQuery,
+        Material,
+        // You can use types or strings:
+        'NotificationListener', // Ignore all NotificationListener widgets, no matter the generic type
+        // For generic types, you could also specify the generic type arguments:
+        NotificationListener<ScrollNotification>,
+        // Add other widgets to ignore
+    },
+  ),
 );
 ```
+
+This flexibility allows you to fine-tune widget tree comparisons while focusing on meaningful structural changes.
 
 ## Contributing
 

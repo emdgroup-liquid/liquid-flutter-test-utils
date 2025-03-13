@@ -56,8 +56,10 @@ void main() {
     await widgetTreeMatchesGolden(
       tester,
       widget: widget,
-      findWidget: (tester, widget) => find.byKey(key),
-      goldenName: "HelloWorldWidgetTree",
+      options: WidgetTreeOptions(
+        findWidget: (tester, widget) => find.byKey(key),
+        goldenName: "HelloWorldWidgetTree",
+      ),
     );
   });
 

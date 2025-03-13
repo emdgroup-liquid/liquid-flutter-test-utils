@@ -1,33 +1,35 @@
-<SampleLiquidWidget bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
-  <LdCard bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
-    <Container clipBehavior="Clip.hardEdge" bg="BoxDecoration(border: Border.all(BorderSide(color: Color(alpha: 1.0000, red: 0.2471, green: 0.2471, blue: 0.2745, colorSpace: ColorSpace.sRGB), width: 2.0, strokeAlign: 1.0)), borderRadius: BorderRadius.circular(8.0))" bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
-      <DecoratedBox position="DecorationPosition.background" bg="BoxDecoration(border: Border.all(BorderSide(color: Color(alpha: 1.0000, red: 0.2471, green: 0.2471, blue: 0.2745, colorSpace: ColorSpace.sRGB), width: 2.0, strokeAlign: 1.0)), borderRadius: BorderRadius.circular(8.0))" bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
-        <ClipPath clipper="_DecorationClipper" bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
-          <Padding padding="EdgeInsets.zero" bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
-            <Column direction="Axis.vertical" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.start" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
-              <LdAutoBackground bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
-                <Consumer-LdSurfaceInfo bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
-                  <ColoredBox color="Color(alpha: 1.0000, red: 0.0941, green: 0.0941, blue: 0.1059, colorSpace: ColorSpace.sRGB)" bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
-                    <Container padding="EdgeInsets.all(24.0)" clipBehavior="Clip.none" constraints="BoxConstraints(w=Infinity, 0.0<=h<=Infinity)" bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
-                      <ConstrainedBox constraints="BoxConstraints(w=Infinity, 0.0<=h<=Infinity)" bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
-                        <Padding padding="EdgeInsets.all(24.0)" bounds="Rect.fromLTRB(0.0, 0.0, 600.0, 200.8)">
-                          <LdExceptionView bounds="Rect.fromLTRB(24.0, 24.0, 576.0, 176.8)">
-                            <LdModalBuilder bounds="Rect.fromLTRB(24.0, 24.0, 576.0, 176.8)">
-                              <LdAutoSpace bounds="Rect.fromLTRB(24.0, 24.0, 576.0, 176.8)">
-                                <Column direction="Axis.vertical" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.center" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" bounds="Rect.fromLTRB(24.0, 24.0, 576.0, 176.8)">
-                                  <LdHint bounds="Rect.fromLTRB(285.6, 24.0, 314.4, 52.8)">
-                                    <Container clipBehavior="Clip.none" constraints="BoxConstraints(14.0<=w<=Infinity, 14.0<=h<=Infinity)" bounds="Rect.fromLTRB(285.6, 24.0, 314.4, 52.8)">
-                                      <ConstrainedBox constraints="BoxConstraints(14.0<=w<=Infinity, 14.0<=h<=Infinity)" bounds="Rect.fromLTRB(285.6, 24.0, 314.4, 52.8)">
-                                        <IntrinsicWidth bounds="Rect.fromLTRB(285.6, 24.0, 314.4, 52.8)">
-                                          <Row direction="Axis.horizontal" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.max" crossAxisAlignment="CrossAxisAlignment.center" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" bounds="Rect.fromLTRB(285.6, 24.0, 314.4, 52.8)">
-                                            <LdIndicator bounds="Rect.fromLTRB(285.6, 24.0, 314.4, 52.8)">
-                                              <SvgPicture bytesLoader="SvgAssetLoader(assets/cross.svg)" width="28.8" height="28.8" alignment="Alignment.center" allowDrawingOutsideViewBox="false" clipBehavior="Clip.hardEdge" colorFilter="null" fit="BoxFit.contain" matchTextDirection="false" excludeFromSemantics="false" bounds="Rect.fromLTRB(285.6, 24.0, 314.4, 52.8)">
-                                                <VectorGraphic bounds="Rect.fromLTRB(285.6, 24.0, 314.4, 52.8)">
-                                                  <SizedBox width="28.8" height="28.8" bounds="Rect.fromLTRB(285.6, 24.0, 314.4, 52.8)">
-                                                    <FittedBox fit="BoxFit.contain" alignment="Alignment.center" bounds="Rect.fromLTRB(285.6, 24.0, 314.4, 52.8)">
-                                                      <SizedBox width="65.0" height="65.0" bounds="Rect.fromLTRB(285.6, 24.0, 314.4, 52.8)" />
-                                                    </FittedBox>
-                                                  </SizedBox>
+<SampleLiquidWidget left="0.0" top="0.0" width="600.0" height="200.8">
+  <LdCard left="0.0" top="0.0" width="600.0" height="200.8">
+    <Container clipBehavior="Clip.hardEdge" bg="BoxDecoration(border: Border.all(BorderSide(color: Color(alpha: 1.0000, red: 0.2471, green: 0.2471, blue: 0.2745, colorSpace: ColorSpace.sRGB), width: 2.0, strokeAlign: 1.0)), borderRadius: BorderRadius.circular(8.0))" left="0.0" top="0.0" width="600.0" height="200.8">
+      <DecoratedBox position="DecorationPosition.background" bg="BoxDecoration(border: Border.all(BorderSide(color: Color(alpha: 1.0000, red: 0.2471, green: 0.2471, blue: 0.2745, colorSpace: ColorSpace.sRGB), width: 2.0, strokeAlign: 1.0)), borderRadius: BorderRadius.circular(8.0))" left="0.0" top="0.0" width="600.0" height="200.8">
+        <ClipPath clipper="_DecorationClipper" left="0.0" top="0.0" width="600.0" height="200.8">
+          <Padding padding="EdgeInsets.zero" left="0.0" top="0.0" width="600.0" height="200.8">
+            <Column direction="Axis.vertical" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.start" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" left="0.0" top="0.0" width="600.0" height="200.8">
+              <LdAutoBackground left="0.0" top="0.0" width="600.0" height="200.8">
+                <Consumer-LdSurfaceInfo left="0.0" top="0.0" width="600.0" height="200.8">
+                  <ColoredBox color="Color(alpha: 1.0000, red: 0.0941, green: 0.0941, blue: 0.1059, colorSpace: ColorSpace.sRGB)" left="0.0" top="0.0" width="600.0" height="200.8">
+                    <Container padding="EdgeInsets.all(24.0)" clipBehavior="Clip.none" constraints="BoxConstraints(w=Infinity, 0.0<=h<=Infinity)" left="0.0" top="0.0" width="600.0" height="200.8">
+                      <ConstrainedBox constraints="BoxConstraints(w=Infinity, 0.0<=h<=Infinity)" left="0.0" top="0.0" width="600.0" height="200.8">
+                        <Padding padding="EdgeInsets.all(24.0)" left="0.0" top="0.0" width="600.0" height="200.8">
+                          <LdExceptionView left="24.0" top="24.0" width="552.0" height="152.8">
+                            <LdModalBuilder left="24.0" top="24.0" width="552.0" height="152.8">
+                              <LdAutoSpace left="24.0" top="24.0" width="552.0" height="152.8">
+                                <Column direction="Axis.vertical" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.center" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" left="24.0" top="24.0" width="552.0" height="152.8">
+                                  <LdHint left="261.6" top="0.0" width="28.80000000000001" height="28.8">
+                                    <Container clipBehavior="Clip.none" constraints="BoxConstraints(14.0<=w<=Infinity, 14.0<=h<=Infinity)" left="261.6" top="0.0" width="28.80000000000001" height="28.8">
+                                      <ConstrainedBox constraints="BoxConstraints(14.0<=w<=Infinity, 14.0<=h<=Infinity)" left="261.6" top="0.0" width="28.80000000000001" height="28.8">
+                                        <IntrinsicWidth left="0.0" top="0.0" width="28.8" height="28.8">
+                                          <Row direction="Axis.horizontal" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.max" crossAxisAlignment="CrossAxisAlignment.center" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" left="0.0" top="0.0" width="28.8" height="28.8">
+                                            <LdIndicator left="0.0" top="0.0" width="28.8" height="28.8">
+                                              <SvgPicture bytesLoader="SvgAssetLoader(assets/cross.svg)" width="28.8" height="28.8" alignment="Alignment.center" allowDrawingOutsideViewBox="false" clipBehavior="Clip.hardEdge" colorFilter="null" fit="BoxFit.contain" matchTextDirection="false" excludeFromSemantics="false" left="0.0" top="0.0">
+                                                <VectorGraphic left="0.0" top="0.0" width="28.8" height="28.8">
+                                                  <Semantics container="false" properties="SemanticsProperties(label: '')" label="" left="0.0" top="0.0" width="28.8" height="28.8">
+                                                    <SizedBox width="28.8" height="28.8" left="0.0" top="0.0">
+                                                      <FittedBox fit="BoxFit.contain" alignment="Alignment.center" left="0.0" top="0.0" width="28.8" height="28.8">
+                                                        <SizedBox width="65.0" height="65.0" left="0.0" top="0.0" />
+                                                      </FittedBox>
+                                                    </SizedBox>
+                                                  </Semantics>
                                                 </VectorGraphic>
                                               </SvgPicture>
                                             </LdIndicator>
@@ -36,74 +38,86 @@
                                       </ConstrainedBox>
                                     </Container>
                                   </LdHint>
-                                  <LdSpacer bounds="Rect.fromLTRB(288.0, 52.8, 312.0, 76.8)">
-                                    <SizedBox width="24.0" height="24.0" bounds="Rect.fromLTRB(288.0, 52.8, 312.0, 76.8)" />
+                                  <LdSpacer left="264.0" top="28.8" width="24.0" height="23.999999999999996">
+                                    <SizedBox width="24.0" height="24.0" left="264.0" top="28.8" />
                                   </LdSpacer>
-                                  <LdTextP bounds="Rect.fromLTRB(235.1, 76.8, 364.9, 102.8)">
-                                    <Text data="An error occurred" inherit="true" color="Color(alpha: 1.0000, red: 0.9569, green: 0.9569, blue: 0.9608, colorSpace: ColorSpace.sRGB)" family="packages/liquid_flutter/Lato" size="16.0" weight="FontWeight.w400" height="1.6" decoration="TextDecoration.none" textDirection="TextDirection.ltr" bounds="Rect.fromLTRB(235.1, 76.8, 364.9, 102.8)">
-                                      <RichText textAlign="TextAlign.start" textDirection="TextDirection.ltr" softWrap="true" overflow="TextOverflow.clip" textScaler="no scaling" textWidthBasis="TextWidthBasis.parent" text="An error occurred" bounds="Rect.fromLTRB(235.1, 76.8, 364.9, 102.8)" />
+                                  <LdTextP left="211.1070098876953" top="52.8" width="129.78598022460938" height="26.0">
+                                    <Text data="An error occurred" inherit="true" color="Color(alpha: 1.0000, red: 0.9569, green: 0.9569, blue: 0.9608, colorSpace: ColorSpace.sRGB)" family="packages/liquid_flutter/Lato" size="16.0" weight="FontWeight.w400" height="1.6" decoration="TextDecoration.none" textDirection="TextDirection.ltr" left="211.1070098876953" top="52.8" width="129.78598022460938">
+                                      <RichText textAlign="TextAlign.start" textDirection="TextDirection.ltr" softWrap="true" overflow="TextOverflow.clip" textScaler="no scaling" textWidthBasis="TextWidthBasis.parent" text="An error occurred" left="211.1070098876953" top="52.8" width="129.78598022460938" height="26.0" />
                                     </Text>
                                   </LdTextP>
-                                  <LdSpacer bounds="Rect.fromLTRB(288.0, 102.8, 312.0, 126.8)">
-                                    <SizedBox width="24.0" height="24.0" bounds="Rect.fromLTRB(288.0, 102.8, 312.0, 126.8)" />
+                                  <LdSpacer left="264.0" top="78.8" width="24.0" height="24.0">
+                                    <SizedBox width="24.0" height="24.0" left="264.0" top="78.8" />
                                   </LdSpacer>
-                                  <Row direction="Axis.horizontal" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.center" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" bounds="Rect.fromLTRB(236.5, 126.8, 363.5, 176.8)">
-                                    <Flexible flex="1" bounds="Rect.fromLTRB(236.5, 126.8, 363.5, 176.8)">
-                                      <LdButton bounds="Rect.fromLTRB(236.5, 126.8, 363.5, 176.8)">
-                                        <LdTouchableSurface bounds="Rect.fromLTRB(236.5, 126.8, 363.5, 176.8)">
-                                          <Listener listeners="[down, up, cancel]" behavior="HitTestBehavior.deferToChild" bounds="Rect.fromLTRB(236.5, 126.8, 363.5, 176.8)">
-                                            <GestureDetector startBehavior="DragStartBehavior.start" bounds="Rect.fromLTRB(236.5, 126.8, 363.5, 176.8)">
-                                              <RawGestureDetector bounds="Rect.fromLTRB(236.5, 126.8, 363.5, 176.8)">
-                                                <Listener listeners="[down, panZoomStart]" behavior="HitTestBehavior.opaque" bounds="Rect.fromLTRB(236.5, 126.8, 363.5, 176.8)">
-                                                  <Opacity opacity="1.0" alwaysIncludeSemantics="false" bounds="Rect.fromLTRB(236.5, 126.8, 363.5, 176.8)">
-                                                    <Container padding="EdgeInsets(22.0, 14.0, 22.0, 14.0)" clipBehavior="Clip.hardEdge" bg="BoxDecoration(color: Color(alpha: 0.0000, red: 0.8627, green: 0.1490, blue: 0.1490, colorSpace: ColorSpace.sRGB), border: Border.all(BorderSide(color: Color(alpha: 1.0000, red: 0.8627, green: 0.1490, blue: 0.1490, colorSpace: ColorSpace.sRGB), width: 2.0)), borderRadius: BorderRadius.circular(4.0))" bounds="Rect.fromLTRB(236.5, 126.8, 363.5, 176.8)">
-                                                      <DecoratedBox position="DecorationPosition.background" bg="BoxDecoration(color: Color(alpha: 0.0000, red: 0.8627, green: 0.1490, blue: 0.1490, colorSpace: ColorSpace.sRGB), border: Border.all(BorderSide(color: Color(alpha: 1.0000, red: 0.8627, green: 0.1490, blue: 0.1490, colorSpace: ColorSpace.sRGB), width: 2.0)), borderRadius: BorderRadius.circular(4.0))" bounds="Rect.fromLTRB(236.5, 126.8, 363.5, 176.8)">
-                                                        <ClipPath clipper="_DecorationClipper" bounds="Rect.fromLTRB(236.5, 126.8, 363.5, 176.8)">
-                                                          <Padding padding="EdgeInsets(24.0, 16.0, 24.0, 16.0)" bounds="Rect.fromLTRB(236.5, 126.8, 363.5, 176.8)">
-                                                            <IconTheme size="18.0" color="Color(alpha: 1.0000, red: 0.8627, green: 0.1490, blue: 0.1490, colorSpace: ColorSpace.sRGB)" bounds="Rect.fromLTRB(260.5, 142.8, 339.5, 160.8)">
-                                                              <AnimatedSize bounds="Rect.fromLTRB(260.5, 142.8, 339.5, 160.8)">
-                                                                <Stack alignment="Alignment.center" fit="StackFit.loose" clipBehavior="Clip.hardEdge" bounds="Rect.fromLTRB(260.5, 142.8, 339.5, 160.8)">
-                                                                  <AnimatedOpacity duration="200" opacity="1.0" bounds="Rect.fromLTRB(260.5, 142.8, 339.5, 160.8)">
-                                                                    <FadeTransition opacity="AnimationController#HASH(⏮ 0.000; paused; for AnimatedOpacity)➩_Linear➩Tween<double>(1.0 → 1.0)➩1.0" alwaysIncludeSemantics="false" bounds="Rect.fromLTRB(260.5, 142.8, 339.5, 160.8)">
-                                                                      <Row direction="Axis.horizontal" mainAxisAlignment="MainAxisAlignment.center" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.center" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" bounds="Rect.fromLTRB(260.5, 142.8, 339.5, 160.8)">
-                                                                        <SizedBox bounds="Rect.fromLTRB(260.5, 151.8, 260.5, 151.8)" />
-                                                                        <Flexible flex="1" bounds="Rect.fromLTRB(260.5, 142.8, 339.5, 160.8)">
-                                                                          <LdAutoSpace bounds="Rect.fromLTRB(260.5, 142.8, 339.5, 160.8)">
-                                                                            <Column direction="Axis.vertical" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.start" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" bounds="Rect.fromLTRB(260.5, 142.8, 339.5, 160.8)">
-                                                                              <Text data="More info" bounds="Rect.fromLTRB(260.5, 142.8, 339.5, 160.8)">
-                                                                                <RichText textAlign="TextAlign.center" softWrap="true" overflow="TextOverflow.clip" textScaler="no scaling" textWidthBasis="TextWidthBasis.parent" text="More info" bounds="Rect.fromLTRB(260.5, 142.8, 339.5, 160.8)" />
-                                                                              </Text>
-                                                                            </Column>
-                                                                          </LdAutoSpace>
-                                                                        </Flexible>
-                                                                        <Container clipBehavior="Clip.none" bounds="Rect.fromLTRB(339.5, 151.8, 339.5, 151.8)">
-                                                                          <LimitedBox maxWidth="0.0" maxHeight="0.0" bounds="Rect.fromLTRB(339.5, 151.8, 339.5, 151.8)">
-                                                                            <ConstrainedBox constraints="BoxConstraints(biggest)" bounds="Rect.fromLTRB(339.5, 151.8, 339.5, 151.8)" />
-                                                                          </LimitedBox>
-                                                                        </Container>
-                                                                      </Row>
-                                                                    </FadeTransition>
-                                                                  </AnimatedOpacity>
-                                                                  <LdSpring bounds="Rect.fromLTRB(300.0, 151.8, 300.0, 151.8)">
-                                                                    <Transform bounds="Rect.fromLTRB(300.0, 151.8, 300.0, 151.8)">
-                                                                      <SizedBox bounds="Rect.fromLTRB(300.0, 171.8, 300.0, 171.8)" />
-                                                                    </Transform>
-                                                                  </LdSpring>
-                                                                  <LdSpring bounds="Rect.fromLTRB(300.0, 151.8, 300.0, 151.8)">
-                                                                    <SizedBox bounds="Rect.fromLTRB(300.0, 151.8, 300.0, 151.8)" />
-                                                                  </LdSpring>
-                                                                </Stack>
-                                                              </AnimatedSize>
-                                                            </IconTheme>
-                                                          </Padding>
-                                                        </ClipPath>
-                                                      </DecoratedBox>
-                                                    </Container>
-                                                  </Opacity>
-                                                </Listener>
-                                              </RawGestureDetector>
-                                            </GestureDetector>
-                                          </Listener>
+                                  <Row direction="Axis.horizontal" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.center" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" left="212.4629898071289" top="102.8" width="127.07402038574219" height="50.000000000000014">
+                                    <Flexible flex="1" left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                      <LdButton left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                        <LdTouchableSurface left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                          <Focus autofocus="false" canRequestFocus="true" descendantsAreFocusable="true" descendantsAreTraversable="true" left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                            <Semantics container="false" properties="SemanticsProperties" left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                              <Builder left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                                <MouseRegion listeners="[enter, exit]" cursor="SystemMouseCursor(click)" opaque="true" left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                                  <Listener listeners="[down, up, cancel]" behavior="HitTestBehavior.deferToChild" left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                                    <GestureDetector startBehavior="DragStartBehavior.start" left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                                      <RawGestureDetector left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                                        <Listener listeners="[down, panZoomStart]" behavior="HitTestBehavior.opaque" left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                                          <Opacity opacity="1.0" alwaysIncludeSemantics="false" left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                                            <Semantics container="false" properties="SemanticsProperties" left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                                              <Container padding="EdgeInsets(22.0, 14.0, 22.0, 14.0)" clipBehavior="Clip.hardEdge" bg="BoxDecoration(color: Color(alpha: 0.0000, red: 0.8627, green: 0.1490, blue: 0.1490, colorSpace: ColorSpace.sRGB), border: Border.all(BorderSide(color: Color(alpha: 1.0000, red: 0.8627, green: 0.1490, blue: 0.1490, colorSpace: ColorSpace.sRGB), width: 2.0)), borderRadius: BorderRadius.circular(4.0))" left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                                                <DecoratedBox position="DecorationPosition.background" bg="BoxDecoration(color: Color(alpha: 0.0000, red: 0.8627, green: 0.1490, blue: 0.1490, colorSpace: ColorSpace.sRGB), border: Border.all(BorderSide(color: Color(alpha: 1.0000, red: 0.8627, green: 0.1490, blue: 0.1490, colorSpace: ColorSpace.sRGB), width: 2.0)), borderRadius: BorderRadius.circular(4.0))" left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                                                  <ClipPath clipper="_DecorationClipper" left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                                                    <Padding padding="EdgeInsets(24.0, 16.0, 24.0, 16.0)" left="0.0" top="0.0" width="127.07402038574219" height="50.0">
+                                                                      <DefaultTextStyle inherit="true" color="Color(alpha: 1.0000, red: 0.8627, green: 0.1490, blue: 0.1490, colorSpace: ColorSpace.sRGB)" family="packages/liquid_flutter/Lato" size="18.0" weight="FontWeight.w700" height="1.0" textAlign="TextAlign.center" softWrap="true" overflow="TextOverflow.clip" textWidthBasis="TextWidthBasis.parent" left="24.0" top="16.0" width="79.07402038574219">
+                                                                        <IconTheme size="18.0" color="Color(alpha: 1.0000, red: 0.8627, green: 0.1490, blue: 0.1490, colorSpace: ColorSpace.sRGB)" left="24.0" top="16.0" width="79.07402038574219" height="18.0">
+                                                                          <AnimatedSize left="24.0" top="16.0" width="79.07402038574219" height="18.0">
+                                                                            <Stack alignment="Alignment.center" fit="StackFit.loose" clipBehavior="Clip.hardEdge" left="0.0" top="0.0" width="79.07402038574219" height="18.0">
+                                                                              <AnimatedOpacity duration="200" opacity="1.0" left="0.0" top="0.0" width="79.07402038574219" height="18.0">
+                                                                                <FadeTransition opacity="AnimationController#HASH(⏮ 0.000; paused; for AnimatedOpacity)➩_Linear➩Tween<double>(1.0 → 1.0)➩1.0" alwaysIncludeSemantics="false" left="0.0" top="0.0" width="79.07402038574219" height="18.0">
+                                                                                  <Row direction="Axis.horizontal" mainAxisAlignment="MainAxisAlignment.center" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.center" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" left="0.0" top="0.0" width="79.07402038574219" height="18.0">
+                                                                                    <SizedBox left="0.0" top="9.0" width="0.0" height="0.0" />
+                                                                                    <Flexible flex="1" left="0.0" top="0.0" width="79.07402038574219" height="18.0">
+                                                                                      <LdAutoSpace left="0.0" top="0.0" width="79.07402038574219" height="18.0">
+                                                                                        <Column direction="Axis.vertical" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.start" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" left="0.0" top="0.0" width="79.07402038574219" height="18.0">
+                                                                                          <Text data="More info" left="0.0" top="0.0" width="79.07402038574219" height="18.0">
+                                                                                            <RichText textAlign="TextAlign.center" softWrap="true" overflow="TextOverflow.clip" textScaler="no scaling" textWidthBasis="TextWidthBasis.parent" text="More info" left="0.0" top="0.0" width="79.07402038574219" height="18.0" />
+                                                                                          </Text>
+                                                                                        </Column>
+                                                                                      </LdAutoSpace>
+                                                                                    </Flexible>
+                                                                                    <Container clipBehavior="Clip.none" left="79.07402038574219" top="9.0" width="0.0" height="0.0">
+                                                                                      <LimitedBox maxWidth="0.0" maxHeight="0.0" left="79.07402038574219" top="9.0" width="0.0" height="0.0">
+                                                                                        <ConstrainedBox constraints="BoxConstraints(biggest)" left="0.0" top="0.0" width="0.0" height="0.0" />
+                                                                                      </LimitedBox>
+                                                                                    </Container>
+                                                                                  </Row>
+                                                                                </FadeTransition>
+                                                                              </AnimatedOpacity>
+                                                                              <LdSpring left="39.537010192871094" top="9.0" width="0.0" height="0.0">
+                                                                                <Transform left="39.537010192871094" top="9.0" width="0.0" height="0.0">
+                                                                                  <SizedBox left="0.0" top="20.0" width="0.0" height="0.0" />
+                                                                                </Transform>
+                                                                              </LdSpring>
+                                                                              <LdSpring left="39.537010192871094" top="9.0" width="0.0" height="0.0">
+                                                                                <SizedBox left="39.537010192871094" top="9.0" width="0.0" height="0.0" />
+                                                                              </LdSpring>
+                                                                            </Stack>
+                                                                          </AnimatedSize>
+                                                                        </IconTheme>
+                                                                      </DefaultTextStyle>
+                                                                    </Padding>
+                                                                  </ClipPath>
+                                                                </DecoratedBox>
+                                                              </Container>
+                                                            </Semantics>
+                                                          </Opacity>
+                                                        </Listener>
+                                                      </RawGestureDetector>
+                                                    </GestureDetector>
+                                                  </Listener>
+                                                </MouseRegion>
+                                              </Builder>
+                                            </Semantics>
+                                          </Focus>
                                         </LdTouchableSurface>
                                       </LdButton>
                                     </Flexible>

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as path;
 
-final Set<dynamic> defaultIgnoredWidgets = {
+const Set<dynamic> defaultIgnoredWidgets = {
   MediaQuery,
   Material,
   AnimatedDefaultTextStyle,
@@ -21,6 +21,52 @@ final Set<dynamic> defaultIgnoredWidgets = {
   Builder,
 };
 
+enum IncludeWidgetBounds {
+  none,
+  relative,
+  absolute,
+}
+
+class WidgetTreeOptions {
+  const WidgetTreeOptions({
+    /// A function to find the widget to create the tree for. If not provided,
+    /// the widget passed to [widgetTreeMatchesGolden] will be used.
+    this.findWidget,
+
+    /// The path to the golden directory. If not provided,
+    /// 'test/golden_widget_trees' will be used.
+    this.goldenPath = 'test/golden_widget_trees',
+
+    /// The name of the golden file to compare with. If not provided, the name
+    /// of the widget will be used.
+    this.goldenName,
+
+    /// A set of widgets to strip from the tree (in order to produce a less
+    /// verbose tree). If not provided, a default set of widgets will be
+    /// used, cf. [defaultIgnoredWidgets].
+    this.strippedWidgets = defaultIgnoredWidgets,
+
+    /// Whether to strip away private widgets (i.e. widgets starting with '_').
+    /// Defaults to true.
+    this.stripPrivateWidgets = true,
+
+    /// Whether to include the bounds of the widgets in the tree. If set to
+    /// [IncludeWidgetBounds.relative], the bounds will be relative to the
+    /// parent widget. If set to [IncludeWidgetBounds.absolute], the bounds
+    /// will be absolute on the screen. If set to [IncludeWidgetBounds.none],
+    /// the bounds will not be included.
+    this.includeWidgetBounds = IncludeWidgetBounds.relative,
+  });
+
+  final Finder Function(WidgetTester, Widget)? findWidget;
+  final String goldenPath;
+  final String? goldenName;
+  final Set<dynamic> strippedWidgets;
+  final bool stripPrivateWidgets;
+  final IncludeWidgetBounds includeWidgetBounds;
+}
+
+/// A node in the widget tree.
 class WidgetTreeNode {
   WidgetTreeNode(this.widget, this.children, {this.bounds});
   Widget widget;
@@ -31,16 +77,24 @@ class WidgetTreeNode {
     final indentStr = '  ' * indent;
     final tag =
         widget.runtimeType.toString().replaceAll('<', '-').replaceAll('>', '');
+    // associate properties with their values
+    Map<String, dynamic> props = {
+      for (var p in widget.toDiagnosticsNode().getProperties())
+        if (p.name != null && p.value != null)
+          p.name!: p.value
+              .toString()
+              .replaceAll('"', "'")
+              .replaceAll(RegExp(r'\s+'), ' ')
+              .trim(),
+    };
     final attrs = [
-      ...widget.toDiagnosticsNode().getProperties().map(
-        (property) {
-          final name = property.name;
-          final value = property.value;
-          if (value == null) return '';
-          return ' $name="$value"'.replaceAll("\n", '');
-        },
-      ),
-      if (bounds != null) ' bounds="$bounds"'
+      ...props.entries.map((e) => ' ${e.key}="${e.value}"'),
+      if (bounds != null) ...[
+        if (!props.containsKey("left")) ' left="${bounds!.left}"',
+        if (!props.containsKey("top")) ' top="${bounds!.top}"',
+        if (!props.containsKey("width")) ' width="${bounds!.width}"',
+        if (!props.containsKey("height")) ' height="${bounds!.height}"',
+      ]
     ].join('');
 
     final content = children.isEmpty
@@ -65,21 +119,17 @@ class WidgetTreeNode {
 Future<void> widgetTreeMatchesGolden(
   WidgetTester tester, {
   required Widget widget,
-  Finder Function(WidgetTester, Widget)? findWidget,
-  String? goldenName,
+  WidgetTreeOptions options = const WidgetTreeOptions(),
   bool? update,
-  Set<dynamic>? ignoredWidgets,
 }) async {
   update ??= autoUpdateGoldenFiles;
-  goldenName ??= widget.runtimeType.toString();
+  final goldenName = options.goldenName ?? widget.runtimeType.toString();
 
   final testTree = createWidgetTree(
-    tester.element(findWidget?.call(tester, widget) ?? find.byWidget(widget)),
+    tester.element(
+        options.findWidget?.call(tester, widget) ?? find.byWidget(widget)),
     tester: tester,
-    ignoredWidgets: (ignoredWidgets ?? defaultIgnoredWidgets)
-        .map((e) => e.toString())
-        .toSet(),
-    ignorePrivateWidgets: true,
+    options: options,
   );
 
   // strip all information from the tree that is not relevant for the comparison
@@ -87,7 +137,7 @@ Future<void> widgetTreeMatchesGolden(
   final testTreeStripped = testTree?.toXmlString() ?? '';
 
   final goldenFile = File(
-    path.join(Directory('test/golden_widget_trees').path, '$goldenName.xml'),
+    path.join(Directory(options.goldenPath).path, '$goldenName.xml'),
   );
 
   // Create the golden directory if it does not exist
@@ -111,11 +161,11 @@ Future<void> widgetTreeMatchesGolden(
   }
 }
 
+/// Recursively creates a widget tree from the given element.
 WidgetTreeNode? createWidgetTree(
   Element e, {
   required WidgetTester tester,
-  required Set<String> ignoredWidgets,
-  required bool ignorePrivateWidgets,
+  required WidgetTreeOptions options,
 }) {
   final widget = e.widget;
   final children = <WidgetTreeNode>[];
@@ -124,18 +174,34 @@ WidgetTreeNode? createWidgetTree(
     final child = createWidgetTree(
       element,
       tester: tester,
-      ignoredWidgets: ignoredWidgets,
-      ignorePrivateWidgets: ignorePrivateWidgets,
+      options: options,
     );
     if (child != null) children.add(child);
   });
 
   final type = widget.runtimeType.toString();
   final typeWithoutGeneric = type.split('<').first;
-  final bounds = tester.getRect(find.byElementPredicate((el) => el == e));
-  if (ignoredWidgets.contains(type) ||
-      ignoredWidgets.contains(typeWithoutGeneric) ||
-      ignorePrivateWidgets && type.startsWith('_')) {
+  final bounds = switch (options.includeWidgetBounds) {
+    IncludeWidgetBounds.none => null,
+    IncludeWidgetBounds.relative => () {
+        final renderBox = e.renderObject as RenderBox?;
+        final pos = renderBox?.localToGlobal(Offset.zero,
+            ancestor: e.renderObject?.parent);
+        return pos == null || renderBox == null
+            ? null
+            : Rect.fromLTWH(
+                pos.dx,
+                pos.dy,
+                renderBox.size.width,
+                renderBox.size.height,
+              );
+      }(),
+    IncludeWidgetBounds.absolute =>
+      tester.getRect(find.byElementPredicate((el) => el == e)),
+  };
+  if (options.strippedWidgets.contains(type) ||
+      options.strippedWidgets.contains(typeWithoutGeneric) ||
+      (options.stripPrivateWidgets && type.startsWith('_'))) {
     if (children.isNotEmpty) {
       return children.length == 1
           ? children.first
