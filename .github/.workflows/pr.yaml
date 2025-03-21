@@ -56,4 +56,4 @@ jobs:
       - name: 💬 Comment on PR with new version
         uses: thollander/actions-comment-pull-request@v2
         with:
-          message: "New version ${{ steps.get_new_version.outputs.result }} 🚀\n\nDetected API changes:\n${{ env.API_CHANGELOG }}"
+          message: "New version ${{ steps.get_new_version.outputs.result }} 🚀"
