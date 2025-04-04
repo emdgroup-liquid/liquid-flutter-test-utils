@@ -299,3 +299,7 @@ This flexibility allows you to fine-tune widget tree comparisons while focusing 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the Apache-2.0 license. See the [LICENSE](LICENSE) file for details.
