@@ -76,8 +76,13 @@ class WidgetTreeNode {
 
   String toXmlString([int indent = 0]) {
     final indentStr = '  ' * indent;
-    final tag =
-        widget.runtimeType.toString().replaceAll('<', '-').replaceAll('>', '');
+    final tag = widget.runtimeType
+        .toString()
+        .replaceAll('<', '-')
+        .replaceAll('>', '')
+        .replaceAll(',', '-')
+        .replaceAll(' ', '');
+
     // associate properties with their values
     Map<String, dynamic> props = {
       for (var p in widget.toDiagnosticsNode().getProperties())
