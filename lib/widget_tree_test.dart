@@ -110,7 +110,7 @@ class WidgetTreeNode {
     final closingTag = children.isEmpty ? '' : '</$tag>';
     final result = '$indentStr<$tag$attrs$slash>$content$closingTag'
         // replace UID hash codes with a generic placeholder
-        .replaceAllMapped(RegExp(r'([a-zA-Z_]+)#[0-9a-fA-F]+'),
+        .replaceAllMapped(RegExp(r'([a-zA-Z_>]+)#[0-9a-fA-F]+'),
             (match) => '${match.group(1)}#HASH');
     return result;
   }
