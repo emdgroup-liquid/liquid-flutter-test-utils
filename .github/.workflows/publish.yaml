@@ -50,10 +50,10 @@ jobs:
             const pubspec = yaml.parse(fs.readFileSync('pubspec.yaml', 'utf8'));
             pubspec.version = version;
             fs.writeFileSync('pubspec.yaml', yaml.stringify(pubspec));
-      - name: Run build runner
-        run: flutter pub run build_runner build --delete-conflicting-outputs
-      - name: Generate l10n
-        run: flutter gen-l10n
+      # - name: Run build runner
+      #   run: flutter pub run build_runner build --delete-conflicting-outputs
+      # - name: Generate l10n
+      #   run: flutter gen-l10n
       - name: Run tests
         run: flutter test
 
