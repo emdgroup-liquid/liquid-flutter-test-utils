@@ -57,6 +57,10 @@ class WidgetTreeOptions {
     /// will be absolute on the screen. If set to [IncludeWidgetBounds.none],
     /// the bounds will not be included.
     this.includeWidgetBounds = IncludeWidgetBounds.relative,
+
+    /// The precision of the bounds to include in the tree, e.g. 2 for
+    /// 2 decimal places. Defaults to 0.
+    this.boundsPrecision = 0,
   });
 
   final Finder Function(WidgetTester, Widget)? findWidget;
@@ -65,6 +69,7 @@ class WidgetTreeOptions {
   final Set<dynamic> strippedWidgets;
   final bool stripPrivateWidgets;
   final IncludeWidgetBounds includeWidgetBounds;
+  final int boundsPrecision;
 }
 
 /// A node in the widget tree.
@@ -74,7 +79,7 @@ class WidgetTreeNode {
   Rect? bounds;
   List<WidgetTreeNode> children;
 
-  String toXmlString([int indent = 0]) {
+  String toXmlString({int indent = 0, required int boundsPrecision}) {
     final indentStr = '  ' * indent;
     final tag = widget.runtimeType
         .toString()
@@ -96,10 +101,14 @@ class WidgetTreeNode {
     final attrs = [
       ...props.entries.map((e) => ' ${e.key}="${e.value}"'),
       if (bounds != null) ...[
-        if (!props.containsKey("left")) ' left="${bounds!.left}"',
-        if (!props.containsKey("top")) ' top="${bounds!.top}"',
-        if (!props.containsKey("width")) ' width="${bounds!.width}"',
-        if (!props.containsKey("height")) ' height="${bounds!.height}"',
+        if (!props.containsKey("left"))
+          ' left="${bounds!.left.toStringAsFixed(boundsPrecision)}"',
+        if (!props.containsKey("top"))
+          ' top="${bounds!.top.toStringAsFixed(boundsPrecision)}"',
+        if (!props.containsKey("width"))
+          ' width="${bounds!.width.toStringAsFixed(boundsPrecision)}"',
+        if (!props.containsKey("height"))
+          ' height="${bounds!.height.toStringAsFixed(boundsPrecision)}"',
       ]
     ].join('');
 
@@ -107,7 +116,8 @@ class WidgetTreeNode {
         ? ''
         : [
               '',
-              ...children.map((child) => child.toXmlString(indent + 1)),
+              ...children.map((child) => child.toXmlString(
+                  indent: indent + 1, boundsPrecision: boundsPrecision)),
               '',
             ].join('\n') +
             indentStr;
@@ -140,7 +150,10 @@ Future<void> widgetTreeMatchesGolden(
 
   // strip all information from the tree that is not relevant for the comparison
   // e.g. hash codes, keys, etc. that change between test runs
-  final testTreeStripped = testTree?.toXmlString() ?? '';
+  final testTreeStripped = testTree?.toXmlString(
+        boundsPrecision: options.boundsPrecision,
+      ) ??
+      '';
 
   final goldenFile = File(
     path.join(Directory(options.goldenPath).path, '$goldenName.xml'),
