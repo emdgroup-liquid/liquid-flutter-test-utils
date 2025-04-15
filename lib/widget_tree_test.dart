@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:liquid_flutter_test_utils/diff_util.dart';
 import 'package:path/path.dart' as path;
 
 const Set<dynamic> defaultIgnoredWidgets = {
@@ -38,6 +39,10 @@ class WidgetTreeOptions {
     /// 'test/golden_widget_trees' will be used.
     this.goldenPath = 'test/golden_widget_trees',
 
+    /// The path to the failure directory. If not provided,
+    /// 'test/failures/golden_widget_trees' will be used.
+    this.failurePath = 'test/failures/golden_widget_trees',
+
     /// The name of the golden file to compare with. If not provided, the name
     /// of the widget will be used.
     this.goldenName,
@@ -64,6 +69,7 @@ class WidgetTreeOptions {
   });
 
   final Finder Function(WidgetTester, Widget)? findWidget;
+  final String failurePath;
   final String goldenPath;
   final String? goldenName;
   final Set<dynamic> strippedWidgets;
@@ -172,11 +178,32 @@ Future<void> widgetTreeMatchesGolden(
     // Compare with existing golden
     final goldenTree = goldenFile.readAsStringSync();
 
-    expectWidgetTrees(
-      testTreeStripped,
-      goldenTree,
-      reason: 'Golden widget tree file mismatch: ${goldenFile.path}',
-    );
+    try {
+      expectEqualStrings(
+        testTreeStripped,
+        goldenTree,
+        reason: 'Widget trees of ${goldenFile.path} does not match',
+      );
+    } on TestFailure catch (_) {
+      // put the diff in the failure folder
+      final diffFile = File(
+        path.join(
+            Directory(options.failurePath).path, '${goldenName}_diff.html'),
+      );
+      // Create the golden directory if it does not exist
+      final diffFileDir = diffFile.parent;
+      if (!diffFileDir.existsSync()) {
+        diffFileDir.createSync(recursive: true);
+      }
+      final diffHtml = generateHtmlFormattedDiff(
+        testTreeStripped,
+        goldenTree,
+        title: 'Widget Tree Comparison',
+        subtitle: 'Widget tree diff for $goldenName',
+      );
+      diffFile.writeAsStringSync(diffHtml);
+      rethrow;
+    }
   }
 }
 
@@ -258,62 +285,4 @@ WidgetTreeNode? createWidgetTree(
   }
 
   return WidgetTreeNode(widget, children, bounds: bounds);
-}
-
-/// ANSI escape codes for color highlighting
-const String red = '\u001b[31m'; // Red color
-const String reset = '\u001b[0m'; // Reset color
-
-/// Finds the first difference between two strings and highlights it in red.
-void expectWidgetTrees(String actual, String expected, {String? reason}) {
-  final expectedLines = expected.split('\n');
-  final actualLines = actual.split('\n');
-
-  for (var i = 0; i < expectedLines.length && i < actualLines.length; i++) {
-    if (expectedLines[i] != actualLines[i]) {
-      final highlightedExpected =
-          _highlightDifference(expectedLines[i], actualLines[i]);
-      final highlightedActual =
-          _highlightDifference(actualLines[i], expectedLines[i]);
-
-      throw TestFailure('''
-Widget tree does not match:
-${reason ?? ''}
-Difference at line ${i + 1}:
-
-Expected: $highlightedExpected
-
-Actual  : $highlightedActual
-''');
-    }
-  }
-
-  if (expectedLines.length != actualLines.length) {
-    throw TestFailure('''
-Widget tree does not match:
-${reason ?? ''}
-Difference in number of lines:
-Expected ${expectedLines.length} lines, but got ${actualLines.length}
-''');
-  }
-}
-
-/// Highlights the first character difference in red.
-String _highlightDifference(String line1, String line2) {
-  final diffIndex = _findFirstDifference(line1, line2);
-  if (diffIndex == -1) return line1; // No difference found
-
-  return line1.substring(0, diffIndex) +
-      red +
-      line1.substring(diffIndex, diffIndex + 1) +
-      reset +
-      line1.substring(diffIndex + 1);
-}
-
-/// Finds the first index where two strings differ.
-int _findFirstDifference(String a, String b) {
-  for (var i = 0; i < a.length && i < b.length; i++) {
-    if (a[i] != b[i]) return i;
-  }
-  return (a.length != b.length) ? a.length : -1;
 }

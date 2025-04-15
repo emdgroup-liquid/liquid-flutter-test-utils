@@ -31,6 +31,9 @@ Future<void> multiGolden(
   debugDisableShadows = false;
   ldDisableAnimations = true;
 
+  // Track if any test fails
+  List<String> failureMessages = [];
+
   // For each scenario, theme size, and brightness ...
   for (final entry in widgets.entries) {
     for (final themeSize in LdThemeSize.values) {
@@ -61,13 +64,18 @@ Future<void> multiGolden(
           );
 
           if (performWidgetTreeTests) {
-            await widgetTreeMatchesGolden(
-              tester,
-              widget: widget,
-              options: WidgetTreeOptions(
-                goldenName: '$name/$slug',
-              ),
-            );
+            try {
+              await widgetTreeMatchesGolden(
+                tester,
+                widget: widget,
+                options: WidgetTreeOptions(
+                  goldenName: '$name/$slug',
+                ),
+              );
+            } catch (e) {
+              failureMessages.add(
+                  'Widget tree test failed for $name/$slug: ${e.toString()}');
+            }
           }
         });
 
@@ -83,8 +91,21 @@ Future<void> multiGolden(
         tester.view.physicalSize =
             Size(ldFrameOptions.width.toDouble(), size.height + heightOffset);
         await tester.pumpAndSettle();
-        await screenMatchesGolden(tester, '$name/$slug');
+
+        try {
+          await screenMatchesGolden(tester, '$name/$slug');
+        } catch (e) {
+          failureMessages.add(
+              'Screen matching golden failed for $name/$slug: ${e.toString()}');
+        }
       }
     }
+  }
+
+  // After all tests have been executed, fail if any test failed
+  if (failureMessages.isNotEmpty) {
+    throw Exception(
+      'One or more golden tests failed:\n${failureMessages.join('\n')}',
+    );
   }
 }

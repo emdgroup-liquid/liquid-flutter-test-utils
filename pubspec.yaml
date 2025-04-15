@@ -6,6 +6,7 @@ environment:
   sdk: ^3.6.1
   flutter: ">=1.17.0"
 dependencies:
+  diff_match_patch: ^0.4.1
   flutter:
     sdk: flutter
   flutter_localizations:
