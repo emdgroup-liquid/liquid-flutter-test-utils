@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as path;
 
@@ -184,17 +185,44 @@ WidgetTreeNode? createWidgetTree(
   final bounds = switch (options.includeWidgetBounds) {
     IncludeWidgetBounds.none => null,
     IncludeWidgetBounds.relative => () {
-        final renderBox = e.renderObject as RenderBox?;
-        final pos = renderBox?.localToGlobal(Offset.zero,
-            ancestor: e.renderObject?.parent);
-        return pos == null || renderBox == null
-            ? null
-            : Rect.fromLTWH(
-                pos.dx,
-                pos.dy,
-                renderBox.size.width,
-                renderBox.size.height,
-              );
+        final renderObject = e.renderObject;
+        if (renderObject is RenderBox) {
+          final pos = renderObject.localToGlobal(Offset.zero,
+              ancestor: e.renderObject?.parent);
+          return Rect.fromLTWH(
+            pos.dx,
+            pos.dy,
+            renderObject.size.width,
+            renderObject.size.height,
+          );
+        }
+
+        if (renderObject is RenderSliverList) {
+          // We cannot just get the bounds of the RenderSliverList
+          final constraints = renderObject.constraints;
+
+          // Get the SliverGeometry which contains positioning info
+          final geometry = renderObject.geometry;
+
+          if (geometry != null && !geometry.visible) {
+            // If the sliver is not visible, return null or an empty rect
+            return null;
+          }
+
+          // Calculate the bounds based on paintOrigin and paintExtent
+          return Rect.fromLTWH(
+            constraints.axis == Axis.vertical ? 0 : geometry!.paintOrigin,
+            constraints.axis == Axis.vertical ? geometry!.paintOrigin : 0,
+            constraints.axis == Axis.vertical
+                ? constraints.crossAxisExtent
+                : geometry!.paintExtent,
+            constraints.axis == Axis.vertical
+                ? geometry!.paintExtent
+                : constraints.crossAxisExtent,
+          );
+        }
+
+        return null;
       }(),
     IncludeWidgetBounds.absolute =>
       tester.getRect(find.byElementPredicate((el) => el == e)),
