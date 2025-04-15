@@ -70,6 +70,8 @@ String generateHtmlFormattedDiff(
 
   // Generate diffs between the two XML strings
   final diffs = diffMatchPatch.diff(actual, expected);
+  diffMatchPatch.diffCleanupEfficiency(diffs);
+  diffMatchPatch.diffCleanupSemantic(diffs);
 
   // Convert the diffs to HTML with proper styling
   return diffsToHtml(diffs, title: title, subtitle: subtitle);
@@ -229,10 +231,6 @@ String diffsToHtml(
 <body>
   <div class="diff-container">
     <div class="diff-header"><p>$title</p><small>$subtitle</small></div>
-    <div class="diff-stats">
-      <div><span class="diff-stats-icon" style="background-color: #34d058;"></span>Additions</div>
-      <div><span class="diff-stats-icon" style="background-color: #d73a49;"></span>Deletions</div>
-    </div>
 ''');
 
   // Count number of lines and operations
@@ -273,13 +271,10 @@ String diffsToHtml(
 
   // Update stats display with real numbers
   buffer.write('''
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        document.querySelector('.diff-stats').innerHTML = 
-          '<div><span class="diff-stats-icon" style="background-color: #34d058;"></span>$additions Additions</div>' +
-          '<div><span class="diff-stats-icon" style="background-color: #d73a49;"></span>$deletions Deletions</div>';
-      });
-    </script>
+    <div class="diff-stats">
+      <div><span class="diff-stats-icon" style="background-color: #34d058;"></span>$additions Additions</div>
+      <div><span class="diff-stats-icon" style="background-color: #d73a49;"></span>$deletions Deletions</div>
+    </div>
   ''');
 
   // Process each line group with line numbers
