@@ -42,8 +42,8 @@
                                     <SizedBox width="10.0" height="10.0" left="285" top="19" />
                                   </LdSpacer>
                                   <LdTextP left="233" top="29" width="114" height="22">
-                                    <Text data="An error occurred" inherit="true" color="Color(alpha: 1.0000, red: 0.9569, green: 0.9569, blue: 0.9608, colorSpace: ColorSpace.sRGB)" family="packages/liquid_flutter/Lato" size="14.0" weight="FontWeight.w400" height="1.6" decoration="TextDecoration.none" textDirection="TextDirection.ltr" left="233" top="29" width="114">
-                                      <RichText textAlign="TextAlign.start" textDirection="TextDirection.ltr" softWrap="true" overflow="TextOverflow.clip" textScaler="no scaling" textWidthBasis="TextWidthBasis.parent" text="An error occurred" left="233" top="29" width="114" height="22" />
+                                    <Text data="An error occurred" inherit="true" color="Color(alpha: 1.0000, red: 0.9569, green: 0.9569, blue: 0.9608, colorSpace: ColorSpace.sRGB)" family="packages/liquid_flutter/Lato" size="14.0" weight="FontWeight.w400" height="1.6" decoration="TextDecoration.none" textAlign="TextAlign.center" textDirection="TextDirection.ltr" left="233" top="29" width="114">
+                                      <RichText textAlign="TextAlign.center" textDirection="TextDirection.ltr" softWrap="true" overflow="TextOverflow.clip" textScaler="no scaling" textWidthBasis="TextWidthBasis.parent" text="An error occurred" left="233" top="29" width="114" height="22" />
                                     </Text>
                                   </LdTextP>
                                   <LdSpacer left="285" top="51" width="10" height="10">
