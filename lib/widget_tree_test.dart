@@ -196,8 +196,8 @@ Future<void> widgetTreeMatchesGolden(
         diffFileDir.createSync(recursive: true);
       }
       final diffHtml = generateHtmlFormattedDiff(
-        testTreeStripped,
         goldenTree,
+        testTreeStripped,
         title: 'Widget Tree Comparison',
         subtitle: 'Widget tree diff for $goldenName',
       );
