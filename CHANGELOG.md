@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/compare/v1.3.0...v1.3.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* correct argument order in HTML diff generation for widget tree tests ([72d5990](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/commit/72d5990fc03385459ba3a549e2a3479d010ae6a9))
+
 ## [1.3.0](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/compare/v1.2.0...v1.3.0) (2025-04-15)
 
 
