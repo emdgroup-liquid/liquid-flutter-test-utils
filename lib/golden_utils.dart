@@ -102,9 +102,6 @@ Future<void> setupGoldenTest({
   await loadAppFonts();
   final fonts = <String, String>{
     FontFamily.lato: 'packages/liquid_flutter/fonts/Lato-Regular.ttf',
-    FontFamily.liquidIcons:
-        'packages/liquid_flutter_emd_theme/fonts/LiquidIcons.ttf',
-    FontFamily.emd: 'packages/liquid_flutter_emd_theme/fonts/EMD.ttf',
   };
   for (final entry in fonts.entries) {
     final fontLoader = FontLoader(entry.key)
