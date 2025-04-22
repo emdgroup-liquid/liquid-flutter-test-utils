@@ -163,25 +163,69 @@ Widget ldFrame({
                       : SystemUiOverlayStyle.dark);
               // debugPrintStack();
               return Scaffold(
-                body: Column(
-                  key: key,
-                  mainAxisSize: ldFrameOptions.uiMode != GoldenUiMode.collapsed
-                      ? MainAxisSize.max
-                      : MainAxisSize.min,
-                  children: [
-                    if (ldFrameOptions.uiMode ==
-                        GoldenUiMode.screenWithSystemUi)
-                      StatusBar(style: uiStyle),
-                    Flexible(
-                      flex: ldFrameOptions.uiMode == GoldenUiMode.collapsed
-                          ? 0
-                          : 1,
-                      child: child,
+                body: MediaQuery(
+                  data: MediaQuery.of(context).copyWith(
+                    viewPadding: EdgeInsets.only(
+                      top: ldFrameOptions.uiMode ==
+                              GoldenUiMode.screenWithSystemUi
+                          ? 64.0
+                          : 0,
+                      bottom: ldFrameOptions.uiMode ==
+                              GoldenUiMode.screenWithSystemUi
+                          ? 50.0
+                          : 0,
                     ),
-                    if (ldFrameOptions.uiMode ==
-                        GoldenUiMode.screenWithSystemUi)
-                      HomeIndicator(style: uiStyle),
-                  ],
+                    padding: EdgeInsets.only(
+                      top: ldFrameOptions.uiMode ==
+                              GoldenUiMode.screenWithSystemUi
+                          ? 64.0
+                          : 0,
+                      bottom: ldFrameOptions.uiMode ==
+                              GoldenUiMode.screenWithSystemUi
+                          ? 50.0
+                          : 0,
+                    ),
+                  ),
+                  child: Stack(
+                    fit: ldFrameOptions.uiMode == GoldenUiMode.collapsed
+                        ? StackFit.loose
+                        : StackFit.expand,
+                    children: [
+                      SafeArea(
+                        key: key,
+                        child: Column(
+                          mainAxisSize:
+                              ldFrameOptions.uiMode != GoldenUiMode.collapsed
+                                  ? MainAxisSize.max
+                                  : MainAxisSize.min,
+                          children: [
+                            Flexible(
+                              flex: ldFrameOptions.uiMode ==
+                                      GoldenUiMode.collapsed
+                                  ? 0
+                                  : 1,
+                              child: child,
+                            ),
+                          ],
+                        ),
+                      ),
+                      if (ldFrameOptions.uiMode ==
+                          GoldenUiMode.screenWithSystemUi) ...[
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          child: StatusBar(style: uiStyle),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: HomeIndicator(style: uiStyle),
+                        ),
+                      ],
+                    ],
+                  ),
                 ),
               );
             }),
@@ -192,41 +236,36 @@ Widget ldFrame({
   );
 }
 
-class HomeIndicator extends StatelessWidget {
-  const HomeIndicator({required this.style, super.key});
-  final SystemUiOverlayStyle style;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(bottom: 16),
-      color: style.systemNavigationBarColor,
-      width: double.infinity,
-      child: SvgPicture.asset(
-        fit: BoxFit.fitWidth,
-        style.systemNavigationBarIconBrightness == Brightness.light
-            ? 'assets/home_indicator_light.svg'
-            : 'assets/home_indicator_dark.svg',
-      ),
-    );
-  }
-}
-
 class StatusBar extends StatelessWidget {
   const StatusBar({required this.style, super.key});
   final SystemUiOverlayStyle style;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(bottom: 16),
-      color: style.statusBarColor,
-      width: double.infinity,
+    return SvgPicture.asset(
+      fit: BoxFit.fitWidth,
+      style.statusBarIconBrightness == Brightness.light
+          ? 'assets/status_bar_light.svg'
+          : 'assets/status_bar_dark.svg',
+    );
+  }
+}
+
+class HomeIndicator extends StatelessWidget {
+  const HomeIndicator({required this.style, super.key});
+  final SystemUiOverlayStyle style;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 8),
       child: SvgPicture.asset(
         fit: BoxFit.fitWidth,
+        // apparently, the system navigation bar icon brightness property produces
+        // wrong results, so we use the status bar icon brightness instead
         style.statusBarIconBrightness == Brightness.light
-            ? 'assets/status_bar_light.svg'
-            : 'assets/status_bar_dark.svg',
+            ? 'assets/home_indicator_light.svg'
+            : 'assets/home_indicator_dark.svg',
       ),
     );
   }
