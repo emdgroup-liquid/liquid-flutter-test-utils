@@ -248,11 +248,24 @@ class StatusBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      fit: BoxFit.fitWidth,
-      style.statusBarIconBrightness == Brightness.light
-          ? 'assets/status_bar_light.svg'
-          : 'assets/status_bar_dark.svg',
+    return Stack(
+      children: [
+        SvgPicture.asset(
+          height: 64.0,
+          style.statusBarIconBrightness == Brightness.light
+              ? 'assets/status_bar_left_light.svg'
+              : 'assets/status_bar_left_dark.svg',
+        ),
+        Positioned(
+          right: 0,
+          child: SvgPicture.asset(
+            height: 64.0,
+            style.statusBarIconBrightness == Brightness.light
+                ? 'assets/status_bar_right_light.svg'
+                : 'assets/status_bar_right_dark.svg',
+          ),
+        ),
+      ],
     );
   }
 }

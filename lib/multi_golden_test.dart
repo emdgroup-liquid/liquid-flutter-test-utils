@@ -5,6 +5,11 @@ import 'package:liquid_flutter/liquid_flutter.dart';
 import 'package:liquid_flutter_test_utils/golden_utils.dart';
 import 'package:liquid_flutter_test_utils/widget_tree_test.dart';
 
+enum Orientation {
+  portrait,
+  landscape,
+}
+
 typedef GoldenWidgetBuilder = Future<void> Function(
   WidgetTester tester,
   Future<void> Function(Widget widget) placeWidget,
@@ -27,6 +32,15 @@ Future<void> multiGolden(
 
   /// Whether to perform widget tree tests as well.
   bool performWidgetTreeTests = true,
+
+  /// The [ThemeSize] scenarios to test.
+  List<LdThemeSize> themeSizeScenarios = LdThemeSize.values,
+
+  /// The [Brightness] scenarios to test.
+  List<Brightness> brightnessScenarios = Brightness.values,
+
+  /// The [Orientation] scenarios to test.
+  List<Orientation> orientationScenarios = const [Orientation.portrait],
 }) async {
   debugDisableShadows = false;
   ldDisableAnimations = true;
@@ -36,67 +50,76 @@ Future<void> multiGolden(
 
   // For each scenario, theme size, and brightness ...
   for (final entry in widgets.entries) {
-    for (final themeSize in LdThemeSize.values) {
-      for (final brightness in Brightness.values) {
-        final slug = '${entry.key}/'
-            "${themeSize.toString().split(".").last}"
-            "-${brightness.toString().split(".").last}";
+    for (final themeSize in themeSizeScenarios) {
+      for (final brightness in brightnessScenarios) {
+        for (final orientation in orientationScenarios) {
+          final slug = "${entry.key}/${[
+            if (themeSizeScenarios.length > 1)
+              themeSize.toString().split(".").last,
+            if (brightnessScenarios.length > 1)
+              brightness.toString().split(".").last,
+            if (orientationScenarios.length > 1)
+              orientation.toString().split(".").last,
+          ].join("-")}";
 
-        await tester.binding.setSurfaceSize(
-          Size(
-              ldFrameOptions.width.toDouble(),
-              ldFrameOptions.height?.toDouble() ??
-                  // if height is null, use a 16:9 aspect ratio
-                  ldFrameOptions.width.toDouble() / 9 * 16),
-        );
-
-        // Place the widget
-        await entry.value(tester, (widget) async {
-          await tester.pumpWidget(
-            ldFrame(
-              key: ValueKey(slug),
-              child: widget,
-              dark: brightness == Brightness.dark,
-              size: themeSize,
-              ldFrameOptions: ldFrameOptions,
-            ),
-            duration: Duration(milliseconds: 100),
-          );
-
-          if (performWidgetTreeTests) {
-            try {
-              await widgetTreeMatchesGolden(
-                tester,
-                widget: widget,
-                options: WidgetTreeOptions(
-                  goldenName: '$name/$slug',
-                ),
-              );
-            } catch (e) {
-              failureMessages.add(
-                  'Widget tree test failed for $name/$slug: ${e.toString()}');
-            }
+          var width = ldFrameOptions.width.toDouble();
+          var height = ldFrameOptions.height?.toDouble() ??
+              // if height is null, use a 16:9 aspect ratio
+              ldFrameOptions.width.toDouble() / 9 * 16;
+          if (orientation == Orientation.landscape) {
+            width = height;
+            height = ldFrameOptions.width.toDouble();
           }
-        });
+          await tester.binding.setSurfaceSize(Size(width, height));
 
-        // Generate golden image
-        final size =
-            find.byKey(ValueKey(slug)).evaluate().single.size ?? Size.zero;
-        await tester.pumpAndSettle();
-        final heightOffset =
-            ldFrameOptions.uiMode == GoldenUiMode.collapsed ? 0 : 64;
-        await tester.binding.setSurfaceSize(
-          Size(ldFrameOptions.width.toDouble(), size.height + heightOffset),
-        );
-        tester.view.physicalSize =
-            Size(ldFrameOptions.width.toDouble(), size.height + heightOffset);
-        await tester.pumpAndSettle();
+          // Place the widget
+          await entry.value(tester, (widget) async {
+            await tester.pumpWidget(
+              ldFrame(
+                key: ValueKey(slug),
+                child: widget,
+                dark: brightness == Brightness.dark,
+                size: themeSize,
+                ldFrameOptions: ldFrameOptions,
+              ),
+              duration: Duration(milliseconds: 100),
+            );
 
-        try {
-          await screenMatchesGolden(tester, '$name/$slug');
-        } catch (e) {
-          failureMessages.add(
-              'Screen matching golden failed for $name/$slug: ${e.toString()}');
+            if (performWidgetTreeTests) {
+              try {
+                await widgetTreeMatchesGolden(
+                  tester,
+                  widget: widget,
+                  options: WidgetTreeOptions(goldenName: '$name/$slug'),
+                );
+              } catch (e) {
+                failureMessages.add(
+                    'Widget tree test failed for $name/$slug: ${e.toString()}');
+              }
+            }
+          });
+
+          // Generate golden image
+          final size =
+              find.byKey(ValueKey(slug)).evaluate().single.size ?? Size.zero;
+          await tester.pumpAndSettle();
+          final heightOffset =
+              ldFrameOptions.uiMode == GoldenUiMode.collapsed ? 0 : 64;
+          await tester.binding.setSurfaceSize(
+            Size(
+              width,
+              size.height + heightOffset,
+            ),
+          );
+          tester.view.physicalSize = Size(width, size.height + heightOffset);
+          await tester.pumpAndSettle();
+
+          try {
+            await screenMatchesGolden(tester, '$name/$slug');
+          } catch (e) {
+            failureMessages.add(
+                'Screen matching golden failed for $name/$slug: ${e.toString()}');
+          }
         }
       }
     }
