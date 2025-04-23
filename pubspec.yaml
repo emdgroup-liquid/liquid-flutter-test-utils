@@ -34,3 +34,8 @@ flutter:
           weight: 500
         - asset: packages/liquid_flutter/fonts/Lato-Bold.ttf
           weight: 800
+
+dependency_overrides:
+  # use a specific version of liquid_flutter to enforce deterministic golden tests
+  # both locally and in CI
+  liquid_flutter: 21.0.5
