@@ -218,6 +218,12 @@ Widget ldFrame({
                           child: StatusBar(style: uiStyle),
                         ),
                         Positioned(
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          child: StatusBarNotch(style: uiStyle),
+                        ),
+                        Positioned(
                           bottom: 0,
                           left: 0,
                           right: 0,
@@ -267,6 +273,19 @@ class HomeIndicator extends StatelessWidget {
             ? 'assets/home_indicator_light.svg'
             : 'assets/home_indicator_dark.svg',
       ),
+    );
+  }
+}
+
+class StatusBarNotch extends StatelessWidget {
+  const StatusBarNotch({required this.style, super.key});
+  final SystemUiOverlayStyle style;
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(
+      fit: BoxFit.fitWidth,
+      'assets/status_bar_notch.svg',
     );
   }
 }
