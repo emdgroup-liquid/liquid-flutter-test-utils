@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/compare/v1.3.1...v1.4.0) (2025-04-23)
+
+
+### Features
+
+* add possibility to generate landscape golden screens ([4a784bd](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/commit/4a784bd5541bde1a2d03b97aca8fa1b115e58ff4))
+* add some factory constructors for common device screen sizes in LdFrameOptions ([997430a](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/commit/997430a18b091f0a4a383548d5d6810f9be8a603))
+* add status bar notch to screenWithSystemUi mode ([f52adff](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/commit/f52adfffce8fe3bdae2156edb7a4d1b32699334a))
+
+
+### Bug Fixes
+
+* make system UI elements overlap screen UI ([123bef1](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/commit/123bef1c48fac42d2bc610fe4d18c51f5a27b2ad))
+
 ### [1.3.1](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/compare/v1.3.0...v1.3.1) (2025-04-15)
 
 
