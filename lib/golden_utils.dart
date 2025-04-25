@@ -338,6 +338,7 @@ class StatusBarNotch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(
+      height: 64.0,
       fit: BoxFit.fitWidth,
       'assets/status_bar_notch.svg',
     );
