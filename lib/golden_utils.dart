@@ -61,24 +61,24 @@ class LdFrameOptions {
 
   factory LdFrameOptions.iPhone16() {
     return LdFrameOptions(
-      width: 2556,
-      height: 1179,
+      width: 1179,
+      height: 2556,
       uiMode: GoldenUiMode.screenWithSystemUi,
     );
   }
 
   factory LdFrameOptions.iPadPro12() {
     return LdFrameOptions(
-      width: 2048,
-      height: 2732,
+      width: 2732,
+      height: 2048,
       uiMode: GoldenUiMode.screenWithSystemUi,
     );
   }
 
   factory LdFrameOptions.googlePixel8() {
     return LdFrameOptions(
-      width: 2400,
-      height: 1080,
+      width: 1080,
+      height: 2400,
       uiMode: GoldenUiMode.screenWithSystemUi,
     );
   }
