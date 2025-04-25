@@ -1,6 +1,6 @@
 {
   "name": "liquid-flutter-test-utils",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Test utilities for Liquid Flutter and more",
   "scripts": {
     "test": "flutter test"

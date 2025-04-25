@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/compare/v1.4.0...v1.4.1) (2025-04-25)
+
+
+### Bug Fixes
+
+* correct default device dimensions to be in portrait ([4e5f77b](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/commit/4e5f77b12f87f518474e571fff05e15bba779f80))
+* enhance status bar notch looks ([34e6852](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/commit/34e6852226930901bfd337777535ccad9f8fea41))
+
 ## [1.4.0](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/compare/v1.3.1...v1.4.0) (2025-04-23)
 
 
