@@ -93,6 +93,15 @@ Future<void> multiGolden(
               size = Size(size.height, size.width);
             }
 
+            await tester.binding.setSurfaceSize(
+              Size(size.width, size.height),
+            );
+
+            tester.view.physicalSize = Size(
+              size.width,
+              (size.height),
+            );
+
             final key = ValueKey(slug);
 
             // Place the widget
@@ -147,17 +156,19 @@ Future<void> multiGolden(
             await tester.pumpAndSettle();
 
             if (ldFrameOptions.height == null) {
+              print("Evaluating size for $name/$slug");
               size = find.byKey(key).evaluate().first.size!;
+              print("Size: $size");
+
+              await tester.binding.setSurfaceSize(
+                Size(size.width, size.height),
+              );
+
+              tester.view.physicalSize = Size(
+                size.width,
+                (size.height),
+              );
             }
-
-            await tester.binding.setSurfaceSize(
-              Size(size.width, size.height),
-            );
-
-            tester.view.physicalSize = Size(
-              size.width,
-              (size.height),
-            );
 
             await tester.pumpAndSettle();
 
