@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:liquid_flutter_test_utils/ld_frame_options.dart';
 import 'package:liquid_flutter_test_utils/golden_utils.dart';
+import 'package:liquid_flutter_test_utils/ld_theme_wrapper.dart';
 import 'package:liquid_flutter_test_utils/multi_golden_test.dart';
+import 'package:liquid_flutter_test_utils/system_ui/ipad_11_pro.dart';
+import 'package:liquid_flutter_test_utils/system_ui/iphone_16_pro.dart';
 import 'package:liquid_flutter_test_utils/widget_tree_test.dart';
 
 import '../example/sample_liquid_screen.dart';
@@ -34,9 +38,11 @@ void main() {
         },
       },
       performWidgetTreeTests: true,
-      ldFrameOptions: LdFrameOptions(
-        uiMode: GoldenUiMode.collapsed,
-      ),
+      frameScenarios: [
+        LdFrameOptions(
+          width: 400,
+        ),
+      ],
     );
   });
 
@@ -72,11 +78,12 @@ void main() {
           await placeWidget(SampleLiquidScreen());
         },
       },
-      performWidgetTreeTests: false,
-      ldFrameOptions: LdFrameOptions(
-        uiMode: GoldenUiMode.screenWithSystemUi,
-        showBackButton: true,
-      ),
+      performWidgetTreeTests: true,
+      frameScenarios: [iPhone16Pro, iPadPro11],
+      orientationScenarios: [
+        Orientation.portrait,
+        Orientation.landscape,
+      ],
     );
   });
 }

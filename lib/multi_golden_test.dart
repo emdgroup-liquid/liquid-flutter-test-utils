@@ -1,13 +1,21 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:liquid_flutter/liquid_flutter.dart';
-import 'package:liquid_flutter_test_utils/golden_utils.dart';
+import 'package:liquid_flutter_test_utils/ld_frame_options.dart';
+import 'package:liquid_flutter_test_utils/ld_frame.dart';
 import 'package:liquid_flutter_test_utils/widget_tree_test.dart';
 
-enum Orientation {
-  portrait,
-  landscape,
+extension _LabelThemeSize on LdThemeSize {
+  String get label => toString().split(".").last.toUpperCase();
+}
+
+extension _LabelBrightness on Brightness {
+  String get label => toString().split(".").last;
+}
+
+extension _LabelOrientation on Orientation {
+  String get label => toString().split(".").last;
 }
 
 typedef GoldenWidgetBuilder = Future<void> Function(
@@ -27,8 +35,8 @@ Future<void> multiGolden(
 
   /// A map of widget builders for various scenarios (e.g. "Default", "Error").
   Map<String, GoldenWidgetBuilder> widgets, {
-  /// The [LdFrameOptions] to use for the tests.
-  LdFrameOptions ldFrameOptions = const LdFrameOptions(),
+  /// The [LdFrameOptions] to use for the tests. Now a list, defaults to one entry.
+  List<LdFrameOptions> frameScenarios = const [LdFrameOptions()],
 
   /// Whether to perform widget tree tests as well.
   bool performWidgetTreeTests = true,
@@ -41,6 +49,9 @@ Future<void> multiGolden(
 
   /// The [Orientation] scenarios to test.
   List<Orientation> orientationScenarios = const [Orientation.portrait],
+
+  /// Whether to clip the screen to the screen radius.
+  bool clipScreenToRadius = false,
 }) async {
   debugDisableShadows = false;
   ldDisableAnimations = true;
@@ -48,77 +59,128 @@ Future<void> multiGolden(
   // Track if any test fails
   List<String> failureMessages = [];
 
-  // For each scenario, theme size, and brightness ...
-  for (final entry in widgets.entries) {
-    for (final themeSize in themeSizeScenarios) {
-      for (final brightness in brightnessScenarios) {
-        for (final orientation in orientationScenarios) {
-          final slug = "${entry.key}/${[
-            if (themeSizeScenarios.length > 1)
-              themeSize.toString().split(".").last,
-            if (brightnessScenarios.length > 1)
-              brightness.toString().split(".").last,
-            if (orientationScenarios.length > 1)
-              orientation.toString().split(".").last,
-          ].join("-")}";
+  // For each frame options, scenario, theme size, and brightness ...
+  for (final ldFrameOptions in frameScenarios) {
+    final frameLabel = ldFrameOptions.label;
+    for (final entry in widgets.entries) {
+      for (final themeSize in themeSizeScenarios) {
+        for (final brightness in brightnessScenarios) {
+          for (final orientation in orientationScenarios) {
+            final slug = "${entry.key}/${[
+              if (themeSizeScenarios.length > 1) themeSize.label,
+              if (brightnessScenarios.length > 1) brightness.label,
+              if (frameScenarios.length > 1) frameLabel,
+              if (orientationScenarios.length > 1) orientation.label,
+            ].join("_")}";
 
-          var width = ldFrameOptions.width.toDouble();
-          var height = ldFrameOptions.height?.toDouble() ??
-              // if height is null, use a 16:9 aspect ratio
-              ldFrameOptions.width.toDouble() / 9 * 16;
-          if (orientation == Orientation.landscape) {
-            width = height;
-            height = ldFrameOptions.width.toDouble();
-          }
-          await tester.binding.setSurfaceSize(Size(width, height));
+            // Apply device pixel ratio from ldFrameOptions
+            tester.view.devicePixelRatio = ldFrameOptions.devicePixelRatio;
 
-          // Place the widget
-          await entry.value(tester, (widget) async {
-            await tester.pumpWidget(
-              ldFrame(
-                key: ValueKey(slug),
-                child: widget,
-                dark: brightness == Brightness.dark,
-                size: themeSize,
-                ldFrameOptions: ldFrameOptions,
-              ),
-              duration: Duration(milliseconds: 100),
+            // Apply target platform from ldFrameOptions
+            if (ldFrameOptions.targetPlatform != null) {
+              debugDefaultTargetPlatformOverride =
+                  ldFrameOptions.targetPlatform;
+            }
+
+            // If we dont have a specified height, we start as a square
+            Size size = Size(
+              ldFrameOptions.width,
+              ldFrameOptions.height ?? ldFrameOptions.width,
             );
 
-            if (performWidgetTreeTests) {
-              try {
-                await widgetTreeMatchesGolden(
-                  tester,
-                  widget: widget,
-                  options: WidgetTreeOptions(goldenName: '$name/$slug'),
-                );
-              } catch (e) {
-                failureMessages.add(
-                    'Widget tree test failed for $name/$slug: ${e.toString()}');
-              }
+            if (orientation == Orientation.landscape) {
+              size = Size(size.height, size.width);
             }
-          });
 
-          // Generate golden image
-          final size =
-              find.byKey(ValueKey(slug)).evaluate().single.size ?? Size.zero;
-          await tester.pumpAndSettle();
-          final heightOffset =
-              ldFrameOptions.uiMode == GoldenUiMode.collapsed ? 0 : 64;
-          await tester.binding.setSurfaceSize(
-            Size(
-              width,
-              size.height + heightOffset,
-            ),
-          );
-          tester.view.physicalSize = Size(width, size.height + heightOffset);
-          await tester.pumpAndSettle();
+            await tester.binding.setSurfaceSize(
+              Size(size.width, size.height),
+            );
 
-          try {
-            await screenMatchesGolden(tester, '$name/$slug');
-          } catch (e) {
-            failureMessages.add(
-                'Screen matching golden failed for $name/$slug: ${e.toString()}');
+            tester.view.physicalSize = Size(
+              size.width,
+              (size.height),
+            );
+
+            final key = ValueKey(slug);
+
+            // Place the widget
+            await entry.value(tester, (widget) async {
+              final frame = ClipRRect(
+                borderRadius: BorderRadius.circular(
+                  clipScreenToRadius ? ldFrameOptions.screenRadius ?? 0 : 0,
+                ),
+                child: ldFrame(
+                  key: key,
+                  child: widget,
+                  dark: brightness == Brightness.dark,
+                  size: themeSize,
+                  ldFrameOptions: ldFrameOptions,
+                  orientation: orientation,
+                ),
+              );
+
+              // If we dont have a specified height, we need to wrap the frame in a
+              // SingleChildScrollView to allow the frame to grow. We will
+              // automatically detect the size of the widget later.
+              if (ldFrameOptions.height == null) {
+                await tester.pumpWidget(
+                  SingleChildScrollView(
+                    child: IntrinsicWidth(
+                      child: frame,
+                    ),
+                  ),
+                  duration: Duration(milliseconds: 100),
+                );
+              } else {
+                await tester.pumpWidget(
+                  frame,
+                  duration: Duration(milliseconds: 100),
+                );
+              }
+
+              if (performWidgetTreeTests) {
+                try {
+                  await widgetTreeMatchesGolden(
+                    tester,
+                    widget: widget,
+                    options: WidgetTreeOptions(goldenName: '$name/$slug'),
+                  );
+                } catch (e) {
+                  failureMessages.add(
+                      'Widget tree test failed for $name/$slug: ${e.toString()}');
+                }
+              }
+            });
+
+            await tester.pumpAndSettle();
+
+            if (ldFrameOptions.height == null) {
+              size = find.byKey(key).evaluate().first.size!;
+
+              await tester.binding.setSurfaceSize(
+                Size(size.width, size.height),
+              );
+
+              tester.view.physicalSize = Size(
+                size.width,
+                (size.height),
+              );
+            }
+
+            await tester.pumpAndSettle();
+
+            try {
+              await expectLater(
+                find.byKey(key),
+                matchesGoldenFile('goldens/$name/$slug.png'),
+              );
+            } catch (e) {
+              failureMessages.add(
+                'Screen matching golden failed for $name/$slug: ${e.toString()}',
+              );
+            }
+
+            debugDefaultTargetPlatformOverride = null;
           }
         }
       }

@@ -9,25 +9,34 @@ class SampleLiquidScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // A screen with a transcluent app bar and a nice background
+
     return Scaffold(
       appBar: LdAppBar(
         context: context,
         title: const Text('Sample Liquid Screen'),
       ),
-      body: SampleLiquidWidget(),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {},
-            ),
-          ],
+      body: SafeArea(
+        bottom: false,
+        child: SingleChildScrollView(
+          child: SampleLiquidWidget().padL(),
+        ),
+      ),
+      bottomNavigationBar: LdCard(
+        flat: false,
+        child: SafeArea(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {},
+              ),
+            ],
+          ),
         ),
       ),
     );

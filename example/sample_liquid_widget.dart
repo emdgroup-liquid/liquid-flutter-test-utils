@@ -29,11 +29,7 @@ class SampleLiquidWidget extends StatelessWidget {
         ldSpacerM,
         LdCard(
           flat: true,
-          header: const Row(
-            children: [
-              LdTag(child: Text("Important information for you")),
-            ],
-          ),
+          header: LdTag(child: Text("Important information for you")),
           footer: Row(
             children: [
               LdButton(
