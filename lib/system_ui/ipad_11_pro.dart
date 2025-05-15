@@ -5,8 +5,10 @@ import 'package:liquid_flutter_test_utils/ld_frame_options.dart';
 
 final iPadPro11 = LdFrameOptions(
   width: 834,
+  label: 'iPadPro11',
   height: 1210,
-  viewPaddig: EdgeInsets.only(top: 24, bottom: 25),
+  viewPaddig: EdgeInsets.all(25),
+  targetPlatform: TargetPlatform.iOS,
   screenRadius: 30,
   build: (
     BuildContext context,

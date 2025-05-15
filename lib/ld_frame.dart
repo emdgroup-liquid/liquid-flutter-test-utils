@@ -47,7 +47,9 @@ Widget ldFrame({
         child: LdThemedAppBuilder(
           appBuilder: (context, theme) => MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            theme: theme,
+            theme: theme.copyWith(
+              platform: ldFrameOptions.targetPlatform,
+            ),
             locale: LiquidLocalizations.supportedLocales.first,
             supportedLocales: LiquidLocalizations.supportedLocales,
             localizationsDelegates: [

@@ -6,6 +6,9 @@ import 'package:flutter/services.dart';
 /// This class defines the appearance and behavior of device frames used to
 /// wrap widgets during testing, including dimensions, padding, and UI overlays.
 class LdFrameOptions {
+  /// An optional label for referencing this frame option in test slugs.
+  final String label;
+
   /// Padding applied to the view inside the frame.
   ///
   /// This represents the safe area insets of the device.
@@ -41,6 +44,8 @@ class LdFrameOptions {
   /// This affects the rendering density of the frame.
   final double devicePixelRatio;
 
+  final TargetPlatform? targetPlatform;
+
   /// Creates a configuration for a device frame.
   ///
   /// The [viewPaddig] defaults to [EdgeInsets.zero] if not specified.
@@ -48,11 +53,13 @@ class LdFrameOptions {
   /// The [devicePixelRatio] defaults to 1.0.
   /// The [showBackButton] defaults to false.
   const LdFrameOptions({
+    this.label = '',
     this.viewPaddig = EdgeInsets.zero,
     this.build,
     this.width = 500,
     this.height,
     this.devicePixelRatio = 1.0,
     this.screenRadius,
+    this.targetPlatform,
   });
 }

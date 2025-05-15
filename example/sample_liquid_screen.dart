@@ -9,6 +9,7 @@ class SampleLiquidScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // A screen with a transcluent app bar and a nice background
+
     return Scaffold(
       appBar: LdAppBar(
         context: context,

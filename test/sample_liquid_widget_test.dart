@@ -38,9 +38,11 @@ void main() {
         },
       },
       performWidgetTreeTests: true,
-      ldFrameOptions: LdFrameOptions(
-        width: 800,
-      ),
+      frameScenarios: [
+        LdFrameOptions(
+          width: 400,
+        ),
+      ],
     );
   });
 
@@ -77,24 +79,7 @@ void main() {
         },
       },
       performWidgetTreeTests: true,
-      ldFrameOptions: iPhone16Pro,
-      orientationScenarios: [
-        Orientation.portrait,
-        Orientation.landscape,
-      ],
-    );
-  });
-  testGoldens("Sample Screen renders correctly on iPad", (tester) async {
-    await multiGolden(
-      tester,
-      "SampleLiquidScreen iPad",
-      {
-        "Default": (tester, placeWidget) async {
-          await placeWidget(SampleLiquidScreen());
-        },
-      },
-      performWidgetTreeTests: true,
-      ldFrameOptions: iPadPro11,
+      frameScenarios: [iPhone16Pro, iPadPro11],
       orientationScenarios: [
         Orientation.portrait,
         Orientation.landscape,

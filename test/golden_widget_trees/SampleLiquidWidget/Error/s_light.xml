@@ -1,0 +1,155 @@
+<SampleLiquidWidget left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+  <LdCard left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+    <Container clipBehavior="Clip.hardEdge" bg="BoxDecoration(border: Border.all(BorderSide(color: Color(alpha: 1.0000, red: 0.8941, green: 0.8941, blue: 0.9059, colorSpace: ColorSpace.sRGB), strokeAlign: 1.0)), borderRadius: BorderRadius.circular(8.0))" left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+      <DecoratedBox position="DecorationPosition.background" bg="BoxDecoration(border: Border.all(BorderSide(color: Color(alpha: 1.0000, red: 0.8941, green: 0.8941, blue: 0.9059, colorSpace: ColorSpace.sRGB), strokeAlign: 1.0)), borderRadius: BorderRadius.circular(8.0))" left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+        <ClipPath clipper="_DecorationClipper" left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+          <Padding padding="EdgeInsets.zero" left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+            <Column direction="Axis.vertical" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.start" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+              <LdAutoBackground left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+                <Consumer-LdSurfaceInfo left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+                  <Container clipBehavior="Clip.hardEdge" bg="BoxDecoration(color: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB))" left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+                    <DecoratedBox position="DecorationPosition.background" bg="BoxDecoration(color: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB))" left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+                      <ClipPath clipper="_DecorationClipper" left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+                        <Padding padding="EdgeInsets.zero" left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+                          <Container padding="EdgeInsets.all(10.0)" clipBehavior="Clip.none" constraints="BoxConstraints(w=Infinity, 0.0<=h<=Infinity)" left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+                            <ConstrainedBox constraints="BoxConstraints(w=Infinity, 0.0<=h<=Infinity)" left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="0.0">
+                              <Padding padding="EdgeInsets.all(10.0)" left="0" top="0" width="2400" height="119" maxHeight="Infinity" maxWidth="2400.0" minHeight="0.0" minWidth="2400.0">
+                                <LdExceptionView left="10" top="10" width="2380" height="99" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="2380.0">
+                                  <StreamBuilder-LdRetryState left="10" top="10" width="2380" height="99" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="2380.0">
+                                    <LdAutoSpace left="10" top="10" width="2380" height="99" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="2380.0">
+                                      <Column direction="Axis.vertical" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.center" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" left="10" top="10" width="2380" height="99" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="2380.0">
+                                        <LdModalBuilder left="1135" top="0" width="110" height="89" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0">
+                                          <LdAutoSpace left="1135" top="0" width="110" height="89" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0">
+                                            <Column direction="Axis.vertical" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.center" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" left="1135" top="0" width="110" height="89" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0">
+                                              <LdHint left="45" top="0" width="19" height="19" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0">
+                                                <Container clipBehavior="Clip.none" constraints="BoxConstraints(14.0<=w<=Infinity, 14.0<=h<=Infinity)" left="45" top="0" width="19" height="19" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0">
+                                                  <ConstrainedBox constraints="BoxConstraints(14.0<=w<=Infinity, 14.0<=h<=Infinity)" left="45" top="0" width="19" height="19" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0">
+                                                    <IntrinsicWidth left="0" top="0" width="19" height="19" maxHeight="Infinity" maxWidth="2380.0" minHeight="14.0" minWidth="14.0">
+                                                      <Row direction="Axis.horizontal" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.max" crossAxisAlignment="CrossAxisAlignment.center" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" left="0" top="0" width="19" height="19" maxHeight="Infinity" maxWidth="19.200000000000003" minHeight="14.0" minWidth="19.200000000000003">
+                                                        <LdIndicator left="0" top="0" width="19" height="19" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                          <SvgPicture bytesLoader="SvgAssetLoader(assets/cross.svg)" width="19.200000000000003" lineHeight="19.200000000000003" alignment="Alignment.center" allowDrawingOutsideViewBox="false" clipBehavior="Clip.hardEdge" colorFilter="null" fit="BoxFit.contain" matchTextDirection="false" excludeFromSemantics="false" left="0" top="0" width="19" height="19" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                            <VectorGraphic left="0" top="0" width="19" height="19" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                              <Semantics container="false" properties="SemanticsProperties(label: '')" label="" left="0" top="0" width="19" height="19" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                <SizedBox width="19.200000000000003" lineHeight="19.200000000000003" left="0" top="0" width="19" height="19" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                  <FittedBox fit="BoxFit.contain" alignment="Alignment.center" left="0" top="0" width="19" height="19" maxHeight="19.200000000000003" maxWidth="19.200000000000003" minHeight="19.200000000000003" minWidth="19.200000000000003">
+                                                                    <SizedBox width="65.0" lineHeight="65.0" left="0" top="0" width="65" height="65" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0" />
+                                                                  </FittedBox>
+                                                                </SizedBox>
+                                                              </Semantics>
+                                                            </VectorGraphic>
+                                                          </SvgPicture>
+                                                        </LdIndicator>
+                                                      </Row>
+                                                    </IntrinsicWidth>
+                                                  </ConstrainedBox>
+                                                </Container>
+                                              </LdHint>
+                                              <LdSpacer left="50" top="19" width="10" height="10" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0">
+                                                <SizedBox width="10.0" lineHeight="10.0" left="50" top="19" width="10" height="10" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0" />
+                                              </LdSpacer>
+                                              <LdTextP left="0" top="29" width="110" height="22" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0">
+                                                <Text data="An error occurred" inherit="true" color="Color(alpha: 1.0000, red: 0.1529, green: 0.1529, blue: 0.1647, colorSpace: ColorSpace.sRGB)" family="packages/liquid_flutter/Lato" size="14.0" weight="FontWeight.w400" lineHeight="1.6" decoration="TextDecoration.none" textAlign="TextAlign.center" textDirection="TextDirection.ltr" left="0" top="29" width="110" height="22" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0">
+                                                  <RichText textAlign="TextAlign.center" textDirection="TextDirection.ltr" softWrap="true" overflow="TextOverflow.clip" textScaler="no scaling" textWidthBasis="TextWidthBasis.parent" text="An error occurred" left="0" top="29" width="110" height="22" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0" color="Color(alpha: 1.0000, red: 0.1529, green: 0.1529, blue: 0.1647, colorSpace: ColorSpace.sRGB)" family="packages/liquid_flutter/Lato" size="14.0" weight="FontWeight.w400" lineHeight="1.6" />
+                                                </Text>
+                                              </LdTextP>
+                                              <LdSpacer left="50" top="51" width="10" height="10" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0">
+                                                <SizedBox width="10.0" lineHeight="10.0" left="50" top="51" width="10" height="10" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0" />
+                                              </LdSpacer>
+                                              <Row direction="Axis.horizontal" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.center" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" left="19" top="61" width="73" height="28" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0">
+                                                <LdButton left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                  <LdTouchableSurface left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                    <Focus autofocus="false" canRequestFocus="true" descendantsAreFocusable="true" descendantsAreTraversable="true" focusNode="FocusNode#HASH(context: Focus)" left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                      <Semantics container="false" properties="SemanticsProperties" left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                        <Builder left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                          <MouseRegion listeners="[enter, exit]" cursor="SystemMouseCursor(click)" opaque="true" left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                            <Listener listeners="[down, up, cancel]" behavior="HitTestBehavior.deferToChild" left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                              <GestureDetector startBehavior="DragStartBehavior.start" left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                <RawGestureDetector left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                  <Listener listeners="[down, panZoomStart]" behavior="HitTestBehavior.opaque" left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                    <Opacity opacity="1.0" alwaysIncludeSemantics="false" left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                      <Semantics container="false" properties="SemanticsProperties" left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                        <Container padding="EdgeInsets(9.0, 7.0, 9.0, 7.0)" clipBehavior="Clip.hardEdge" bg="BoxDecoration(color: Color(alpha: 0.0000, red: 0.9373, green: 0.2667, blue: 0.2667, colorSpace: ColorSpace.sRGB), border: Border.all(BorderSide(color: Color(alpha: 1.0000, red: 0.9373, green: 0.2667, blue: 0.2667, colorSpace: ColorSpace.sRGB))), borderRadius: BorderRadius.circular(4.0))" left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                          <DecoratedBox position="DecorationPosition.background" bg="BoxDecoration(color: Color(alpha: 0.0000, red: 0.9373, green: 0.2667, blue: 0.2667, colorSpace: ColorSpace.sRGB), border: Border.all(BorderSide(color: Color(alpha: 1.0000, red: 0.9373, green: 0.2667, blue: 0.2667, colorSpace: ColorSpace.sRGB))), borderRadius: BorderRadius.circular(4.0))" left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                            <ClipPath clipper="_DecorationClipper" left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                              <Padding padding="EdgeInsets(10.0, 8.0, 10.0, 8.0)" left="0" top="0" width="73" height="28" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                <DefaultTextStyle inherit="true" color="Color(alpha: 1.0000, red: 0.9373, green: 0.2667, blue: 0.2667, colorSpace: ColorSpace.sRGB)" family="packages/liquid_flutter/Lato" size="12.0" weight="FontWeight.w700" lineHeight="1.0" textAlign="TextAlign.center" softWrap="true" overflow="TextOverflow.clip" textWidthBasis="TextWidthBasis.parent" left="10" top="8" width="53" height="12" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                  <IconTheme size="12.0" color="Color(alpha: 1.0000, red: 0.9373, green: 0.2667, blue: 0.2667, colorSpace: ColorSpace.sRGB)" left="10" top="8" width="53" height="12" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                    <AnimatedSize left="10" top="8" width="53" height="12" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                      <Stack alignment="Alignment.center" fit="StackFit.loose" clipBehavior="Clip.hardEdge" left="0" top="0" width="53" height="12" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                        <AnimatedOpacity duration="200" opacity="1.0" left="0" top="0" width="53" height="12" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                          <FadeTransition opacity="AnimationController#HASH(⏮ 0.000; paused; for AnimatedOpacity)➩_Linear➩Tween<double>(1.0 → 1.0)➩1.0" alwaysIncludeSemantics="false" left="0" top="0" width="53" height="12" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                            <Row direction="Axis.horizontal" mainAxisAlignment="MainAxisAlignment.center" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.center" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" left="0" top="0" width="53" height="12" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                              <SizedBox left="0" top="6" width="0" height="0" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0" />
+                                                                                              <Flexible flex="1" left="0" top="0" width="53" height="12" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                                <LdAutoSpace left="0" top="0" width="53" height="12" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                                  <Column direction="Axis.vertical" mainAxisAlignment="MainAxisAlignment.start" mainAxisSize="MainAxisSize.min" crossAxisAlignment="CrossAxisAlignment.start" verticalDirection="VerticalDirection.down" clipBehavior="Clip.none" spacing="0.0" left="0" top="0" width="53" height="12" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                                    <Text data="More info" left="0" top="0" width="53" height="12" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                                      <RichText textAlign="TextAlign.center" softWrap="true" overflow="TextOverflow.clip" textScaler="no scaling" textWidthBasis="TextWidthBasis.parent" text="More info" left="0" top="0" width="53" height="12" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0" color="Color(alpha: 1.0000, red: 0.9373, green: 0.2667, blue: 0.2667, colorSpace: ColorSpace.sRGB)" family="packages/liquid_flutter/Lato" size="12.0" weight="FontWeight.w700" lineHeight="1.0" />
+                                                                                                    </Text>
+                                                                                                  </Column>
+                                                                                                </LdAutoSpace>
+                                                                                              </Flexible>
+                                                                                              <Container clipBehavior="Clip.none" left="53" top="6" width="0" height="0" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                                <LimitedBox maxWidth="0.0" maxHeight="0.0" left="53" top="6" width="0" height="0" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                                  <ConstrainedBox constraints="BoxConstraints(biggest)" left="0" top="0" width="0" height="0" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" />
+                                                                                                </LimitedBox>
+                                                                                              </Container>
+                                                                                            </Row>
+                                                                                          </FadeTransition>
+                                                                                        </AnimatedOpacity>
+                                                                                        <LdSpring left="26" top="6" width="0" height="0" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                          <Transform left="26" top="6" width="0" height="0" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                            <SizedBox left="0" top="20" width="0" height="0" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0" />
+                                                                                          </Transform>
+                                                                                        </LdSpring>
+                                                                                        <LdSpring left="26" top="6" width="0" height="0" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0">
+                                                                                          <SizedBox left="26" top="6" width="0" height="0" maxHeight="Infinity" maxWidth="Infinity" minHeight="0.0" minWidth="0.0" />
+                                                                                        </LdSpring>
+                                                                                      </Stack>
+                                                                                    </AnimatedSize>
+                                                                                  </IconTheme>
+                                                                                </DefaultTextStyle>
+                                                                              </Padding>
+                                                                            </ClipPath>
+                                                                          </DecoratedBox>
+                                                                        </Container>
+                                                                      </Semantics>
+                                                                    </Opacity>
+                                                                  </Listener>
+                                                                </RawGestureDetector>
+                                                              </GestureDetector>
+                                                            </Listener>
+                                                          </MouseRegion>
+                                                        </Builder>
+                                                      </Semantics>
+                                                    </Focus>
+                                                  </LdTouchableSurface>
+                                                </LdButton>
+                                              </Row>
+                                            </Column>
+                                          </LdAutoSpace>
+                                        </LdModalBuilder>
+                                        <LdSpacer left="1185" top="89" width="10" height="10" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0">
+                                          <SizedBox width="10.0" lineHeight="10.0" left="1185" top="89" width="10" height="10" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0" />
+                                        </LdSpacer>
+                                        <SizedBox left="1190" top="99" width="0" height="0" maxHeight="Infinity" maxWidth="2380.0" minHeight="0.0" minWidth="0.0" />
+                                      </Column>
+                                    </LdAutoSpace>
+                                  </StreamBuilder-LdRetryState>
+                                </LdExceptionView>
+                              </Padding>
+                            </ConstrainedBox>
+                          </Container>
+                        </Padding>
+                      </ClipPath>
+                    </DecoratedBox>
+                  </Container>
+                </Consumer-LdSurfaceInfo>
+              </LdAutoBackground>
+            </Column>
+          </Padding>
+        </ClipPath>
+      </DecoratedBox>
+    </Container>
+  </LdCard>
+</SampleLiquidWidget>

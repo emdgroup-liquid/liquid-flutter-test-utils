@@ -4,9 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:liquid_flutter_test_utils/ld_frame_options.dart';
 
 final iPhone16Pro = LdFrameOptions(
+  label: 'iPhone16Pro',
   viewPaddig: EdgeInsets.only(top: 44, bottom: 34),
   width: 393,
   height: 852,
+  targetPlatform: TargetPlatform.iOS,
   screenRadius: 55,
   devicePixelRatio: 3.0,
   build: (
