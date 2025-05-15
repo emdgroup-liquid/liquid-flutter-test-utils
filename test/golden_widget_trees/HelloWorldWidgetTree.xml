@@ -1,8 +1,8 @@
-<Container padding="EdgeInsets(16.0, 8.0, 16.0, 8.0)" clipBehavior="Clip.none" constraints="BoxConstraints(w=200.0, h=100.0)" left="0" top="0" width="600" height="225">
-  <ConstrainedBox constraints="BoxConstraints(w=200.0, h=100.0)" left="0" top="0" width="600" height="225">
-    <Padding padding="EdgeInsets(16.0, 8.0, 16.0, 8.0)" left="0" top="0" width="600" height="225">
-      <Text data="Hello World" left="16" top="8" width="568" height="209">
-        <RichText textAlign="TextAlign.start" softWrap="true" overflow="TextOverflow.clip" textScaler="no scaling" textWidthBasis="TextWidthBasis.parent" text="Hello World" left="16" top="8" width="568" height="209" />
+<Container padding="EdgeInsets(16.0, 8.0, 16.0, 8.0)" clipBehavior="Clip.none" constraints="BoxConstraints(w=200.0, h=100.0)" left="0" top="0" width="2400" height="225" maxHeight="224.8" maxWidth="2400.0" minHeight="224.8" minWidth="2400.0">
+  <ConstrainedBox constraints="BoxConstraints(w=200.0, h=100.0)" left="0" top="0" width="2400" height="225" maxHeight="224.8" maxWidth="2400.0" minHeight="224.8" minWidth="2400.0">
+    <Padding padding="EdgeInsets(16.0, 8.0, 16.0, 8.0)" left="0" top="0" width="2400" height="225" maxHeight="224.8" maxWidth="2400.0" minHeight="224.8" minWidth="2400.0">
+      <Text data="Hello World" left="16" top="8" width="2368" height="209" maxHeight="208.8" maxWidth="2368.0" minHeight="208.8" minWidth="2368.0">
+        <RichText textAlign="TextAlign.start" softWrap="true" overflow="TextOverflow.clip" textScaler="no scaling" textWidthBasis="TextWidthBasis.parent" text="Hello World" left="16" top="8" width="2368" height="209" maxHeight="208.8" maxWidth="2368.0" minHeight="208.8" minWidth="2368.0" color="Color(alpha: 1.0000, red: 0.1529, green: 0.1529, blue: 0.1647, colorSpace: ColorSpace.sRGB)" family="packages/liquid_flutter/Lato" size="null" weight="null" lineHeight="null" />
       </Text>
     </Padding>
   </ConstrainedBox>

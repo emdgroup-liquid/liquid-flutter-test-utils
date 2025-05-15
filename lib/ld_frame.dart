@@ -5,7 +5,7 @@ import 'package:liquid_flutter/liquid_flutter.dart';
 import 'package:liquid_flutter_test_utils/ld_frame_options.dart';
 import 'package:liquid_flutter_test_utils/golden_utils.dart';
 import 'package:liquid_flutter_test_utils/ld_theme_wrapper.dart';
-import 'package:liquid_flutter_test_utils/system_overlays.dart';
+import 'package:liquid_flutter_test_utils/system_ui/system_overlays.dart';
 
 /// Create a frame for a widget to be used in golden tests.
 Widget ldFrame({
@@ -15,10 +15,11 @@ Widget ldFrame({
   required LdThemeSize size,
   required LdFrameOptions ldFrameOptions,
   required Orientation orientation,
+  bool showBackButton = false,
 }) {
   GoRouter router(Function(BuildContext, GoRouterState) app) {
     return GoRouter(
-      initialLocation: ldFrameOptions.showBackButton ? '/child' : '/',
+      initialLocation: showBackButton ? '/child' : '/',
       routes: [
         GoRoute(
           path: '/',
