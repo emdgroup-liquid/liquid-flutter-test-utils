@@ -156,9 +156,7 @@ Future<void> multiGolden(
             await tester.pumpAndSettle();
 
             if (ldFrameOptions.height == null) {
-              print("Evaluating size for $name/$slug");
               size = find.byKey(key).evaluate().first.size!;
-              print("Size: $size");
 
               await tester.binding.setSurfaceSize(
                 Size(size.width, size.height),
