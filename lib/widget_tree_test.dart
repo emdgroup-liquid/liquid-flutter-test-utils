@@ -80,9 +80,12 @@ class WidgetTreeOptions {
 
 /// A node in the widget tree.
 class WidgetTreeNode {
-  WidgetTreeNode(this.widget, this.children, {this.bounds});
+  WidgetTreeNode(this.widget, this.children, this.finder,
+      {this.bounds, this.constraints});
   Widget widget;
   Rect? bounds;
+  Constraints? constraints;
+  Finder finder;
   List<WidgetTreeNode> children;
 
   String toXmlString({int indent = 0, required int boundsPrecision}) {
@@ -105,17 +108,34 @@ class WidgetTreeNode {
               .trim(),
     };
     final attrs = [
-      ...props.entries.map((e) => ' ${e.key}="${e.value}"'),
+      ...props.entries.map((e) {
+        // Height and line height are conflicting properties
+        if (e.key == "height") {
+          return ' lineHeight="${e.value}"';
+        }
+        return ' ${e.key}="${e.value}"';
+      }),
       if (bounds != null) ...[
         if (!props.containsKey("left"))
           ' left="${bounds!.left.toStringAsFixed(boundsPrecision)}"',
         if (!props.containsKey("top"))
           ' top="${bounds!.top.toStringAsFixed(boundsPrecision)}"',
-        if (!props.containsKey("width"))
-          ' width="${bounds!.width.toStringAsFixed(boundsPrecision)}"',
-        if (!props.containsKey("height"))
-          ' height="${bounds!.height.toStringAsFixed(boundsPrecision)}"',
-      ]
+        ' width="${bounds!.width.toStringAsFixed(boundsPrecision)}"',
+        ' height="${bounds!.height.toStringAsFixed(boundsPrecision)}"',
+      ],
+      if (constraints is BoxConstraints) ...[
+        ' maxHeight="${(constraints as BoxConstraints).maxHeight}"',
+        ' maxWidth="${(constraints as BoxConstraints).maxWidth}"',
+        ' minHeight="${(constraints as BoxConstraints).minHeight}"',
+        ' minWidth="${(constraints as BoxConstraints).minWidth}"',
+      ],
+      if (widget is RichText) ...[
+        ' color="${(widget as RichText).text.style?.color?.toString() ?? 'null'}"',
+        ' family="${(widget as RichText).text.style?.fontFamily ?? 'null'}"',
+        ' size="${(widget as RichText).text.style?.fontSize ?? 'null'}"',
+        ' weight="${(widget as RichText).text.style?.fontWeight?.toString() ?? 'null'}"',
+        ' lineHeight="${(widget as RichText).text.style?.height?.toString() ?? 'null'}"',
+      ],
     ].join('');
 
     final content = children.isEmpty
@@ -225,6 +245,8 @@ WidgetTreeNode? createWidgetTree(
     if (child != null) children.add(child);
   });
 
+  final finder = find.byElementPredicate((el) => el == e);
+
   final type = widget.runtimeType.toString();
   final typeWithoutGeneric = type.split('<').first;
   final bounds = switch (options.includeWidgetBounds) {
@@ -269,20 +291,25 @@ WidgetTreeNode? createWidgetTree(
 
         return null;
       }(),
-    IncludeWidgetBounds.absolute =>
-      tester.getRect(find.byElementPredicate((el) => el == e)),
+    IncludeWidgetBounds.absolute => tester.getRect(finder),
   };
+
+  // ignore: invalid_use_of_protected_member
+  final constraints = e.renderObject?.constraints;
+
   if (options.strippedWidgets.contains(type) ||
       options.strippedWidgets.contains(typeWithoutGeneric) ||
       (options.stripPrivateWidgets && type.startsWith('_'))) {
     if (children.isNotEmpty) {
       return children.length == 1
           ? children.first
-          : WidgetTreeNode(widget, children, bounds: bounds);
+          : WidgetTreeNode(widget, children, finder,
+              bounds: bounds, constraints: constraints);
     } else {
       return null;
     }
   }
 
-  return WidgetTreeNode(widget, children, bounds: bounds);
+  return WidgetTreeNode(widget, children, finder,
+      bounds: bounds, constraints: constraints);
 }

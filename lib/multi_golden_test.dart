@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:liquid_flutter/liquid_flutter.dart';
-import 'package:liquid_flutter_test_utils/golden_utils.dart';
+import 'package:liquid_flutter_test_utils/ld_frame_options.dart';
+import 'package:liquid_flutter_test_utils/ld_frame.dart';
 import 'package:liquid_flutter_test_utils/widget_tree_test.dart';
-
-enum Orientation {
-  portrait,
-  landscape,
-}
 
 typedef GoldenWidgetBuilder = Future<void> Function(
   WidgetTester tester,
@@ -41,6 +37,9 @@ Future<void> multiGolden(
 
   /// The [Orientation] scenarios to test.
   List<Orientation> orientationScenarios = const [Orientation.portrait],
+
+  /// Whether to clip the screen to the screen radius.
+  bool clipScreenToRadius = false,
 }) async {
   debugDisableShadows = false;
   ldDisableAnimations = true;
@@ -62,28 +61,55 @@ Future<void> multiGolden(
               orientation.toString().split(".").last,
           ].join("-")}";
 
-          var width = ldFrameOptions.width.toDouble();
-          var height = ldFrameOptions.height?.toDouble() ??
-              // if height is null, use a 16:9 aspect ratio
-              ldFrameOptions.width.toDouble() / 9 * 16;
+          // Apply device pixel ratio from ldFrameOptions
+          tester.view.devicePixelRatio = ldFrameOptions.devicePixelRatio;
+
+          // If we dont have a specified height, we start as a square
+          Size size = Size(
+            ldFrameOptions.width,
+            ldFrameOptions.height ?? ldFrameOptions.width,
+          );
+
           if (orientation == Orientation.landscape) {
-            width = height;
-            height = ldFrameOptions.width.toDouble();
+            size = Size(size.height, size.width);
           }
-          await tester.binding.setSurfaceSize(Size(width, height));
+
+          final key = ValueKey(slug);
 
           // Place the widget
           await entry.value(tester, (widget) async {
-            await tester.pumpWidget(
-              ldFrame(
-                key: ValueKey(slug),
+            final frame = ClipRRect(
+              borderRadius: BorderRadius.circular(
+                clipScreenToRadius ? ldFrameOptions.screenRadius ?? 0 : 0,
+              ),
+              child: ldFrame(
+                key: key,
                 child: widget,
                 dark: brightness == Brightness.dark,
                 size: themeSize,
                 ldFrameOptions: ldFrameOptions,
+                orientation: orientation,
               ),
-              duration: Duration(milliseconds: 100),
             );
+
+            // If we dont have a specified height, we need to wrap the frame in a
+            // SingleChildScrollView to allow the frame to grow. We will
+            // automatically detect the size of the widget later.
+            if (ldFrameOptions.height == null) {
+              await tester.pumpWidget(
+                SingleChildScrollView(
+                  child: IntrinsicWidth(
+                    child: frame,
+                  ),
+                ),
+                duration: Duration(milliseconds: 100),
+              );
+            } else {
+              await tester.pumpWidget(
+                frame,
+                duration: Duration(milliseconds: 100),
+              );
+            }
 
             if (performWidgetTreeTests) {
               try {
@@ -99,19 +125,21 @@ Future<void> multiGolden(
             }
           });
 
-          // Generate golden image
-          final size =
-              find.byKey(ValueKey(slug)).evaluate().single.size ?? Size.zero;
           await tester.pumpAndSettle();
-          final heightOffset =
-              ldFrameOptions.uiMode == GoldenUiMode.collapsed ? 0 : 64;
+
+          if (ldFrameOptions.height == null) {
+            size = find.byKey(key).evaluate().first.size!;
+          }
+
           await tester.binding.setSurfaceSize(
-            Size(
-              width,
-              size.height + heightOffset,
-            ),
+            Size(size.width, size.height),
           );
-          tester.view.physicalSize = Size(width, size.height + heightOffset);
+
+          tester.view.physicalSize = Size(
+            size.width,
+            (size.height),
+          );
+
           await tester.pumpAndSettle();
 
           try {
