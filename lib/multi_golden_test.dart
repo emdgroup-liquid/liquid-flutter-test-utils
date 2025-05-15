@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:liquid_flutter/liquid_flutter.dart';
 import 'package:liquid_flutter_test_utils/ld_frame_options.dart';
 import 'package:liquid_flutter_test_utils/ld_frame.dart';
