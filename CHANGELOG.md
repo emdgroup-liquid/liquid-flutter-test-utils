@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/compare/v1.4.1...v1.5.0) (2025-05-15)
+
+
+### Features
+
+* allow for different device frames ([#7](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/issues/7)) ([5cfdac3](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/commit/5cfdac36597d5825c8ebb20b1036c590ad5502fb))
+
 ### [1.4.1](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/compare/v1.4.0...v1.4.1) (2025-04-25)
 
 
