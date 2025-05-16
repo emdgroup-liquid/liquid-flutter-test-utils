@@ -103,6 +103,7 @@ class _StatusBar extends StatelessWidget {
       child: Row(
         children: [
           SvgPicture.asset(
+            package: 'liquid_flutter_test_utils',
             height: statusHeight,
             style.statusBarIconBrightness == Brightness.light
                 ? 'assets/status_bar_left_light.svg'
@@ -112,6 +113,7 @@ class _StatusBar extends StatelessWidget {
             child: SizedBox.shrink(),
           ),
           SvgPicture.asset(
+            package: 'liquid_flutter_test_utils',
             height: statusHeight,
             style.statusBarIconBrightness == Brightness.light
                 ? 'assets/status_bar_right_light.svg'
@@ -133,6 +135,7 @@ class _HomeIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     final indicator = SvgPicture.asset(
       fit: BoxFit.fitWidth,
+      package: 'liquid_flutter_test_utils',
       // invert to have contrast
       !dark
           ? 'assets/home_indicator_dark.svg'

@@ -87,7 +87,7 @@ Widget ldFrame({
                             child,
                             dark,
                             style ??
-                                (dark
+                                (!dark
                                     ? SystemUiOverlayStyle.dark
                                     : SystemUiOverlayStyle.light),
                           );

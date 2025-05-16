@@ -75,6 +75,7 @@ class _StatusBar extends StatelessWidget {
         children: [
           SvgPicture.asset(
             height: statusHeight,
+            package: 'liquid_flutter_test_utils',
             style.statusBarIconBrightness == Brightness.light
                 ? 'assets/status_bar_left_light.svg'
                 : 'assets/status_bar_left_dark.svg',
@@ -82,6 +83,7 @@ class _StatusBar extends StatelessWidget {
           Spacer(),
           SvgPicture.asset(
             height: statusHeight,
+            package: 'liquid_flutter_test_utils',
             style.statusBarIconBrightness == Brightness.light
                 ? 'assets/status_bar_right_light.svg'
                 : 'assets/status_bar_right_dark.svg',
