@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/compare/v1.5.0...v1.5.1) (2025-05-16)
+
+
+### Bug Fixes
+
+* correct logic for dark mode in ldFrame and add package reference for status bar assets ([#8](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/issues/8)) ([6d5b837](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/commit/6d5b83705d1d1e7720bbc9ed92c33cf3905ceaf0))
+
 ## [1.5.0](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/compare/v1.4.1...v1.5.0) (2025-05-15)
 
 
