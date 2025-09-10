@@ -11,10 +11,7 @@ class SampleLiquidScreen extends StatelessWidget {
     // A screen with a transcluent app bar and a nice background
 
     return Scaffold(
-      appBar: LdAppBar(
-        context: context,
-        title: const Text('Sample Liquid Screen'),
-      ),
+      appBar: LdAppBar(title: const Text('Sample Liquid Screen')),
       body: SafeArea(
         bottom: false,
         child: SingleChildScrollView(

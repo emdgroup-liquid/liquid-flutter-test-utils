@@ -104,6 +104,7 @@ class WidgetTreeNode {
           p.name!: p.value
               .toString()
               .replaceAll('"', "'")
+              .replaceAll("&", "&amp;")
               .replaceAll(RegExp(r'\s+'), ' ')
               .trim(),
     };
