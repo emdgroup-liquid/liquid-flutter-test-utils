@@ -1,5 +1,10 @@
+import 'dart:math';
+import 'dart:nativewrappers/_internal/vm/lib/hash_factories.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:liquid_flutter_test_utils/system_ui/iphone_16_pro.dart';
 
 /// Configuration options for creating device frames in golden tests.
 ///
@@ -62,4 +67,37 @@ class LdFrameOptions {
     this.screenRadius,
     this.targetPlatform,
   });
+
+  /// Creates a copy of this [LdFrameOptions] but with the given fields replaced
+  /// by the new values.
+  ///
+  /// This is useful for creating modified copies of default configurations (e.g.
+  /// [iPhone16Pro]) without having to specify all fields again.
+  LdFrameOptions copyWith({
+    String? label,
+    EdgeInsets? viewPaddig,
+    Widget Function(
+      BuildContext context,
+      Orientation orientation,
+      Widget child,
+      bool dark,
+      SystemUiOverlayStyle navigationBarStyle,
+    )? build,
+    double? width,
+    double? height,
+    double? devicePixelRatio,
+    double? screenRadius,
+    TargetPlatform? targetPlatform,
+  }) {
+    return LdFrameOptions(
+      label: label ?? this.label,
+      viewPaddig: viewPaddig ?? this.viewPaddig,
+      build: build ?? this.build,
+      width: width ?? this.width,
+      height: height ?? this.height,
+      devicePixelRatio: devicePixelRatio ?? this.devicePixelRatio,
+      screenRadius: screenRadius ?? this.screenRadius,
+      targetPlatform: targetPlatform ?? this.targetPlatform,
+    );
+  }
 }
