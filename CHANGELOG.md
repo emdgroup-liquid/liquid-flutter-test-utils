@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/compare/v1.5.1...v1.6.0) (2025-09-10)
+
+
+### Features
+
+* enhance LdFrameOptions with additional copyWith parameters for customization ([d5ed140](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/commit/d5ed140ca2bf53caba7a664cb0857473b761fce6))
+* enhance LdFrameOptions with additional copyWith parameters for customization ([924f4cb](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/commit/924f4cb9a968029e1bdf3020ae8869f030701d00))
+
+
+### Bug Fixes
+
+* escape ampersands in widget tree test output ([9e14003](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/commit/9e14003ca9c7ce140836b75dfe1ea75f4bbe4a8e))
+
 ### [1.5.1](https://github.com/emdgroup-liquid/liquid-flutter-test-utils/compare/v1.5.0...v1.5.1) (2025-05-16)
 
 
