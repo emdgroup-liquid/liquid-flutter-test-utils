@@ -35,7 +35,7 @@ void main() {
   setUpAll(() async {
     await setupGoldenTest();
   });
-  
+
   // Your tests go here
 }
 ```
@@ -49,7 +49,7 @@ import 'package:liquid_flutter_test_utils/multi_golden_test.dart';
 
 testGoldens("Widget renders correctly", (tester) async {
   final widget = YourWidget();
-  
+
   await multiGolden(
     tester,
     "YourWidget",
@@ -98,9 +98,9 @@ testGoldens("Widget tree matches expected structure", (tester) async {
   final widget = ldThemeWrapper(
     child: YourWidget(key: key),
   );
-  
+
   await tester.pumpWidget(widget);
-  
+
   await widgetTreeMatchesGolden(
     tester,
     widget: widget,
@@ -139,29 +139,30 @@ When running the tests, the package generates golden images for all combinations
 test/goldens/
 └── SampleLiquidWidget/
     ├── Default/
-    │   ├── l-dark.png   # Large theme size, dark mode
-    │   ├── l-light.png  # Large theme size, light mode
-    │   ├── m-dark.png   # Medium theme size, dark mode
-    │   ├── m-light.png  # Medium theme size, light mode
-    │   ├── s-dark.png   # Small theme size, dark mode
-    │   └── s-light.png  # Small theme size, light mode
+    │   ├── L-dark.png   # Large theme size, dark mode
+    │   ├── L-light.png  # Large theme size, light mode
+    │   ├── M-dark.png   # Medium theme size, dark mode
+    │   ├── M-light.png  # Medium theme size, light mode
+    │   ├── S-dark.png   # Small theme size, dark mode
+    │   └── S-light.png  # Small theme size, light mode
     └── Error/
-        ├── l-dark.png
-        ├── l-light.png
-        ├── m-dark.png
-        ├── m-light.png
-        ├── s-dark.png
-        └── s-light.png
+        ├── L-dark.png
+        ├── L-light.png
+        ├── M-dark.png
+        ├── M-light.png
+        ├── S-dark.png
+        └── S-light.png
 ```
+
 Each state of your widget (e.g., "Default", "Error") gets its own directory containing all theme variations.
 
 Here are some example generated golden images that were generated for `SampleLiquidWidget`:
 
-| Theme       | Dark Mode                                                 | Light Mode                                                 |
-|-------------|-----------------------------------------------------------|------------------------------------------------------------|
-| **Large**   | ![](./test/goldens/SampleLiquidWidget/Default/l-dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/l-light.png) |
-| **Medium**  | ![](./test/goldens/SampleLiquidWidget/Default/m-dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/m-light.png) |
-| **Small**   | ![](./test/goldens/SampleLiquidWidget/Default/s-dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/s-light.png) |
+| Theme      | Dark Mode                                                 | Light Mode                                                 |
+| ---------- | --------------------------------------------------------- | ---------------------------------------------------------- |
+| **Large**  | ![](./test/goldens/SampleLiquidWidget/Default/L-dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/L-light.png) |
+| **Medium** | ![](./test/goldens/SampleLiquidWidget/Default/M-dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/M-light.png) |
+| **Small**  | ![](./test/goldens/SampleLiquidWidget/Default/S-dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/S-light.png) |
 
 ## Advanced Features
 
@@ -181,13 +182,12 @@ The `GoldenUiMode` enum defines the available modes for how the frame should be 
 
 The `LdFrameOptions` constructor allows you to configure the widget frame with the following parameters:
 
-| Parameter           | Type               | Default Value                     | Description                                                                                                 |
-|---------------------|--------------------|-----------------------------------|-------------------------------------------------------------------------------------------------------------|
-| `width`             | `int`              | `600`                             | The width of the frame.                                                                                     |
-| `height`            | `int?`             | `null`                            | The height of the frame. If `null`, the height will adjust to fit the widget or screen size.                |
-| `uiMode`            | `GoldenUiMode`     | `GoldenUiMode.screenWithSystemUi` | Defines how the frame should be sized (collapsed, screen, or screenWithSystemUi).                   |
-| `showBackButton`    | `bool`             | `false`                           | Whether the app bar should show a back button. Useful for generating screenshots for screens on sub-routes. |
-  
+| Parameter        | Type           | Default Value                     | Description                                                                                                 |
+| ---------------- | -------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `width`          | `int`          | `600`                             | The width of the frame.                                                                                     |
+| `height`         | `int?`         | `null`                            | The height of the frame. If `null`, the height will adjust to fit the widget or screen size.                |
+| `uiMode`         | `GoldenUiMode` | `GoldenUiMode.screenWithSystemUi` | Defines how the frame should be sized (collapsed, screen, or screenWithSystemUi).                           |
+| `showBackButton` | `bool`         | `false`                           | Whether the app bar should show a back button. Useful for generating screenshots for screens on sub-routes. |
 
 ### Custom Threshold for Image Comparison
 
@@ -266,9 +266,9 @@ class WidgetTreeOptions {
 - **Ignored Widgets (`strippedWidgets`)**: Defines a set of widgets to be stripped from the tree to reduce verbosity.
 - **Strip Private Widgets (`stripPrivateWidgets`)**: If `true`, private widgets (starting with `_`) are removed. Default: `true`.
 - **Include Widget Bounds (`includeWidgetBounds`)**:
-    - `IncludeWidgetBounds.none`: Bounds are not included.
-    - `IncludeWidgetBounds.relative`: Bounds are relative to the parent widget.
-    - `IncludeWidgetBounds.absolute`: Bounds are absolute on the screen.
+  - `IncludeWidgetBounds.none`: Bounds are not included.
+  - `IncludeWidgetBounds.relative`: Bounds are relative to the parent widget.
+  - `IncludeWidgetBounds.absolute`: Bounds are absolute on the screen.
 
 ## Customizing Ignored Widgets
 
