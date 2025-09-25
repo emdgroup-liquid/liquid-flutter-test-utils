@@ -139,19 +139,19 @@ When running the tests, the package generates golden images for all combinations
 test/goldens/
 └── SampleLiquidWidget/
     ├── Default/
-    │   ├── L-dark.png   # Large theme size, dark mode
-    │   ├── L-light.png  # Large theme size, light mode
-    │   ├── M-dark.png   # Medium theme size, dark mode
-    │   ├── M-light.png  # Medium theme size, light mode
-    │   ├── S-dark.png   # Small theme size, dark mode
-    │   └── S-light.png  # Small theme size, light mode
+    │   ├── L_dark.png   # Large theme size, dark mode
+    │   ├── L_light.png  # Large theme size, light mode
+    │   ├── M_dark.png   # Medium theme size, dark mode
+    │   ├── M_light.png  # Medium theme size, light mode
+    │   ├── S_dark.png   # Small theme size, dark mode
+    │   └── S_light.png  # Small theme size, light mode
     └── Error/
-        ├── L-dark.png
-        ├── L-light.png
-        ├── M-dark.png
-        ├── M-light.png
-        ├── S-dark.png
-        └── S-light.png
+        ├── L_dark.png
+        ├── L_light.png
+        ├── M_dark.png
+        ├── M_light.png
+        ├── S_dark.png
+        └── S_light.png
 ```
 
 Each state of your widget (e.g., "Default", "Error") gets its own directory containing all theme variations.
@@ -160,9 +160,9 @@ Here are some example generated golden images that were generated for `SampleLiq
 
 | Theme      | Dark Mode                                                 | Light Mode                                                 |
 | ---------- | --------------------------------------------------------- | ---------------------------------------------------------- |
-| **Large**  | ![](./test/goldens/SampleLiquidWidget/Default/L-dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/L-light.png) |
-| **Medium** | ![](./test/goldens/SampleLiquidWidget/Default/M-dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/M-light.png) |
-| **Small**  | ![](./test/goldens/SampleLiquidWidget/Default/S-dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/S-light.png) |
+| **Large**  | ![](./test/goldens/SampleLiquidWidget/Default/L_dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/L_light.png) |
+| **Medium** | ![](./test/goldens/SampleLiquidWidget/Default/M_dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/M_light.png) |
+| **Small**  | ![](./test/goldens/SampleLiquidWidget/Default/S_dark.png) | ![](./test/goldens/SampleLiquidWidget/Default/S_light.png) |
 
 ## Advanced Features
 
